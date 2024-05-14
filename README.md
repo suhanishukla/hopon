@@ -1,5 +1,6 @@
 # HopOn
-**Date:** May 14, 2024 
+**Date:** May 14, 2024
+**Contributors:** Sneha Agarwal, Riya Gupta, Sanjana Rathore, Aaryan Rustagi, Rushil Shah, Suhani Shukla
 
 Color Codes: 
 Eggshell White: F0EAD6
