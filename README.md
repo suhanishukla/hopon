@@ -15,8 +15,7 @@ You are now in the hopon project folder!
 ## Setting up Dependencies
 Client Side
 1. cd client
-2. npx create-react-app ./
-3. npm install --legacy-peer-deps
+2.  npm install --legacy-peer-deps
 
 
 Server Side
