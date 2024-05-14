@@ -1,7 +1,7 @@
 # HopOn
 **Date:** May 14, 2024 
 
-## Color Codes: 
+Color Codes: 
 Eggshell White: F0EAD6
 Brown: 3d2814
 
