@@ -20,7 +20,6 @@ Client Side
 
 Server Side
 1. cd server
-2. npm init -y
-3. npm install body-parser cors express mongoose nodemon
+2. npm install body-parser cors express mongoose nodemon
 
 
