@@ -25,6 +25,7 @@ Client Side
 1. cd client
 2. npm install --legacy-peer-deps
 3. npm install react-typed --legacy-peer-deps (typewriting animation on home page)
+4. npm install @material-ui/core --legacy-peer-deps
 
 
 Server Side
