@@ -23,7 +23,8 @@ Using nvm to run the right version
 ## Setting up Dependencies
 Client Side
 1. cd client
-2.  npm install --legacy-peer-deps
+2. npm install --legacy-peer-deps
+3. npm install react-typed --legacy-peer-deps (typewriting animation on home page)
 
 
 Server Side
