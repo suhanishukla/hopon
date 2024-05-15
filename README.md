@@ -3,6 +3,7 @@
 **Contributors:** Sneha Agarwal, Riya Gupta, Sanjana Rathore, Aaryan Rustagi, Rushil Shah, Suhani Shukla
 
 Color Codes: 
+Background White: FFFFFF
 Eggshell White: F0EAD6
 Brown: 3d2814
 
