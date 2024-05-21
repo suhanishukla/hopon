@@ -14,7 +14,7 @@ Brown: 3d2814
 
 You are now in the hopon project folder!
 ## This project runs node version 16.20.2
-Using nvm to run the right version
+Using nvm to run the right version https://github.com/nvm-sh/nvm
 1. $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 2. add it to your path: $ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
