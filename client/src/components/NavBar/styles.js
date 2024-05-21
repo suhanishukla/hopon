@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
-    borderRadius: 15,
-    margin: '30px 0',
+    margin: '0',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'left',
+    alignItems: 'left',
+    backgroundColor: '#3d2814',
   },
   image: {
     marginLeft: '15px',
@@ -16,5 +16,15 @@ export default makeStyles(() => ({
     padding: 0,
     fontFamily: "Poppins, sans-serif",
     fontWeight: 600,
-  }
+  },
+  typography: {
+    color: '#fff',
+    fontFamily: "Poppins, sans-serif",
+    fontWeight: 600,
+  },
+  button: {
+    color: '#fff',
+  },
 }));
+
+export default useStyles;
