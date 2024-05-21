@@ -25,7 +25,7 @@ Using nvm to run the right version https://github.com/nvm-sh/nvm
 Client Side
 1. cd client
 2. npm install --legacy-peer-deps
-3. npm install react-typed --legacy-peer-deps (typewriting animation on home page)
+3. npm install react-typed --legacy-peer-deps
 4. npm install @material-ui/core --legacy-peer-deps
 5. npm install reactjs-popup --legacy-peer-deps
 6. npm install react-icons --save
