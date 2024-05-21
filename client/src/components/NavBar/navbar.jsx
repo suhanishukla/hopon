@@ -4,8 +4,11 @@ import useStyles from './styles';
 
 
 export const NavBar = () => {
-  const classes = useStyles();
-
+  const myStyle = {
+    fontFamily: 'Arial, sans-serif',
+    color: 'white',
+    flexGrow: 1, 
+  }
   return (
     <AppBar >
       <Toolbar>
