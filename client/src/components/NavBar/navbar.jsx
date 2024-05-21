@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Box, Button } from '@material-
 import useStyles from './styles';
 
 
+
 export const NavBar = () => {
   const myStyle = {
     fontFamily: 'Arial, sans-serif',
@@ -10,7 +11,7 @@ export const NavBar = () => {
     flexGrow: 1, 
   }
   return (
-    <AppBar >
+    <AppBar style={{ backgroundColor: '#3d2814' }}>
       <Toolbar>
         <IconButton edge="start" aria-label="menu">
           {/* Your icon component */}

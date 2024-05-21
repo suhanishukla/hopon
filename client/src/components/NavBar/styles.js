@@ -8,6 +8,8 @@ export default makeStyles(() => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F0EAD6',
+    
   },
   image: {
     marginLeft: '15px',
@@ -17,4 +19,5 @@ export default makeStyles(() => ({
     fontFamily: "Poppins, sans-serif",
     fontWeight: 600,
   }
+
 }));
