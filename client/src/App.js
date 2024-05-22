@@ -1,36 +1,21 @@
 import React from 'react';
-import { Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
-import useStyles from './styles';
-import { NavBar } from './components/NavBar/navbar.jsx';
-import { ReactTyped } from 'react-typed';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import FindRide from './pages/FindRide';
+import Home from './pages/Home';
+import PostRide from './pages/PostRide';
+import Login from './pages/Login';
+import Navbar from './components/Navbar'; // Adjust the path as necessary
 
-
-const App = () => {
-    const classes = useStyles();
-    return (
-        <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position="static" color="inherit">
-                <NavBar />
-            </AppBar>
-            <h1>
-                <ReactTyped
-                strings={[
-                    "Book your ride in seconds...",
-                    "Affordable rides, anytime...",
-                    "Share your journey...",
-                    "Explore new destinations...",
-                    "Ride with comfort...",
-                    "Post a ride...",
-                    "Effortless ride booking...",
-                    "Hop in and ride on..."
-                ]}
-                typeSpeed={100}
-                backSpeed={50}
-                loop
-                />
-                </h1>
-        </Container>
-    );
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/Find a Ride" component={FindRide} />
+        <Route path="/Post a Ride" component={PostRide} />
+        <Route path="/Log In" component={Login} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
-
-export default App;
