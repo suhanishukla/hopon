@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const containerStyle = {
   display: 'flex',
@@ -19,10 +19,10 @@ const loginBoxStyle = {
 };
 
 export default function LoginPage() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSignUpClick = () => {
-    history.push('/Signup');
+    navigate('/Signup');
   };
 
   return (
