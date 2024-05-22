@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="nav-right">
         <Link to="/Find a Ride">Find a Ride</Link>
         <Link to="/Post a Ride">Post a Ride</Link>
-        <Link to="/Log In">Log in</Link>
+        <Link to="/LogIn">Log in</Link>
       </div>
     </nav>
   );
