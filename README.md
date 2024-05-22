@@ -29,6 +29,7 @@ Client Side
 4. npm install @material-ui/core --legacy-peer-deps
 5. npm install reactjs-popup --legacy-peer-deps
 6. npm install react-icons --save
+7. npm install react-router-dom
 
 
 Server Side
