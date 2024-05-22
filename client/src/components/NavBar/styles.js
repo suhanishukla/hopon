@@ -21,9 +21,11 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     fontFamily: "Poppins, sans-serif",
     fontWeight: 600,
+
   },
   button: {
     color: '#fff',
+    marginLeft: '20px',
   },
 }));
 

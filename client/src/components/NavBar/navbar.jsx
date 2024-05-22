@@ -7,7 +7,7 @@ export const NavBar = () => {
 
   return (
     <AppBar className={classes.appBar}>
-      <Toolbar>
+      <Toolbar >
         <IconButton edge="start" aria-label="menu" className={classes.button}>
           {/* Your icon component */}
         </IconButton>
@@ -15,8 +15,8 @@ export const NavBar = () => {
           HopOn!
         </Typography>
         <Box>
-          <Button color="inherit" className={classes.button}>
-            <Typography variant="body1" className={classes.typography}>
+          <Button color="inherit" className={classes.button} style={{ marginLeft: "900px"}}>
+            <Typography variant="body1" className={classes.typography} style={{ flexGrow: 1 }}>
               Find a Ride
             </Typography>
           </Button>
