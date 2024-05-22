@@ -1,33 +1,23 @@
 import React from 'react';
-import {useEffect, useState} from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import FindRide from './pages/FindRide';
+import Home from './pages/Home';
+import PostRide from './pages/PostRide';
+import Login from './pages/Login';
+import SignUp from './pages/Signup'; // Import SignUp component
+import Navbar from './components/Navbar'; // Adjust the path as necessary
 
-const App = () => {
-
-    const [users,setUsers] = useState(null)
-    useEffect(()=> {
-        const fetchUsers = async () => {
-            const response = await fetch('/api/workouts')
-            const json = await response.json()
-            const rushilUsers = json.filter(user => user.first_name.toLowerCase() === 'rushil'); //filter for ava shah
-            if (response.ok)
-            {
-                setUsers(rushilUsers)
-            }
-        }
-        fetchUsers()
-    }, [])
-
-
-    return (
-        <div>
-            <h1>App</h1>
-            <div className='home'>
-                {users && users.map((users) => (
-                    <p key={users._id}>{users.first_name} {users.last_name}</p>
-                ))}
-            </div>
-        </div>
-    );
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/Find a Ride" component={FindRide} />
+        <Route path="/Post a Ride" component={PostRide} />
+        <Route path="/LogIn" component={Login} />
+        <Route path="/SignUp" component={SignUp} /> {/* Route to SignUp component */}
+      </Switch>
+    </BrowserRouter>
+  );
 }
-
-export default App;
