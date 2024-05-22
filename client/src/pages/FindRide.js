@@ -1,5 +1,7 @@
 import React from 'react';
-import RidePopup from './../components/ridepopup';
+import RidePopup from '../components/ridepopup';
+import RideCard from '../components/RideCard';
+
 
 export default function FindRide() {
   return (
@@ -22,6 +24,8 @@ export default function FindRide() {
                ]}
                additionalInfo="We will be meeting at the parking lot and I will drive us. It will be $20 per person!"
            />
+        
+      
 
     </div>
   );
