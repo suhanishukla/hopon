@@ -24,7 +24,7 @@ export default function FindRide() {
                ]}
                additionalInfo="We will be meeting at the parking lot and I will drive us. It will be $20 per person!"
            />
-        
+      <RideCard />
       
 
     </div>
