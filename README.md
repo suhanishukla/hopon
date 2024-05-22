@@ -28,7 +28,7 @@ Client Side
 3. npm install react-typed --legacy-peer-deps
 4. npm install @material-ui/core --legacy-peer-deps
 5. npm install reactjs-popup --legacy-peer-deps
-6. npm install react-icons --save
+6. npm install react-icons --save --legacy-peer-deps
 7. npm install react-router-dom --legacy-peer-deps
 
 
