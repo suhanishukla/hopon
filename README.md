@@ -5,7 +5,7 @@
 Color Codes: 
 Background White: FFFFFF
 Eggshell White: F0EAD6
-Brown: 3d2814
+Brown: #401c19
 
 ## Cloning the Repo
 1. cd Desktop
