@@ -1,5 +1,6 @@
 import React from 'react';
 import RidePopup from './../components/ridepopup';
+// import RideCard from './../components/ridecard';
 
 export default function FindRide() {
   return (
@@ -26,3 +27,4 @@ export default function FindRide() {
     </div>
   );
 }
+
