@@ -5,7 +5,7 @@
 Color Codes: 
 Background White: FFFFFF
 Eggshell White: F0EAD6
-Brown: 3d2814
+Brown: #401c19
 
 ## Cloning the Repo
 1. cd Desktop
@@ -28,7 +28,7 @@ Client Side
 3. npm install react-typed --legacy-peer-deps
 4. npm install @material-ui/core --legacy-peer-deps
 5. npm install reactjs-popup --legacy-peer-deps
-6. npm install react-icons --save
+6. npm install react-icons --save --legacy-peer-deps
 7. npm install react-router-dom --legacy-peer-deps
 
 
