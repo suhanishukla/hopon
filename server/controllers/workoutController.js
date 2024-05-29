@@ -27,7 +27,7 @@ const get_user = async(req, res) => {
 //create a new workout
 const new_users = async(req, res) =>{
     const {username, password, first_name} = req.body
-
+    
     //add doc to db
     try {
         const user = await users.create({username, password, first_name})
