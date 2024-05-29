@@ -34,7 +34,7 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
 
  return (
    <Popup
-     trigger={<button>more info</button>}
+     trigger={<button>Post a Ride</button>}
      modal
      nested
      contentStyle={{
