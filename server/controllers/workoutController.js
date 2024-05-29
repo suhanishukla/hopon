@@ -31,8 +31,8 @@ const new_users = async(req, res) =>{
     //add doc to db
     try {
         const user = await users.create({username, password, first_name})
-        res.status(200).redirect('/login')
-        //res.status(200).json(user)
+        // res.status(200).redirect('/login')
+        res.status(200).json(user)
     }
     catch (error)
     {
