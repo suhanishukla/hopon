@@ -41,10 +41,10 @@ export default function SignUp({ setShowSignUp }) {
       </button>
       <h2 style={{ fontSize: '20px', marginBottom: '20px', textAlign: 'center', fontFamily: '"Poppins", sans-serif', fontWeight: '600' }}>Sign Up</h2>
       {/* Sign-up form */}
-      <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <input type="text" placeholder="Name" style={{ marginBottom: '10px', width: '100%' }} />
-        <input type="email" placeholder="Email" style={{ marginBottom: '10px', width: '100%' }} />
-        <input type="password" placeholder="Password" style={{ marginBottom: '10px', width: '100%' }} />
+      <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} action="http://localhost:4000/api/workouts/signup" method="post">
+        <input type="text" placeholder="Name" name="first_name" style={{ marginBottom: '10px', width: '100%' }} />
+        <input type="email" placeholder="Email" name="username" style={{ marginBottom: '10px', width: '100%' }} />
+        <input type="password" placeholder="Password" name="password"style={{ marginBottom: '10px', width: '100%' }} />
         <input type="password" placeholder="Confirm Password" style={{ marginBottom: '20px', width: '100%' }} />
         <button style={signUpButtonStyle}>Sign Up</button>
       </form>
