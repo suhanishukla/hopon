@@ -9,20 +9,39 @@ const all_users = async(req, res) => {
 }
 
 //get a single workout
-const get_user = async(req, res) => {
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id))
-    {
-        res.status(404).json({error: "No such user found"})
+const loginUser = async (req, res) => {
+    const { username, password } = req.body;
+  
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
     }
-
-    const single_user = await users.findById(id)
-    if (!single_user){
-        return res.status(404).json({error: "No such user"}) //return to prevent it from running rest of the code
+  
+    try {
+      const user = await users.findOne({ username, password });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found or incorrect password' });
+      }
+  
+      res.status(200).json({ message: 'Login successful', user });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error', error });
     }
-    res.status(200).json(single_user)
-}
+  };
+
+// const get_user = async(req, res) => {
+//     const {id} = req.params
+
+//     if (!mongoose.Types.ObjectId.isValid(id))
+//     {
+//         res.status(404).json({error: "No such user found"})
+//     }
+
+//     const single_user = await users.findById(id)
+//     if (!single_user){
+//         return res.status(404).json({error: "No such user"}) //return to prevent it from running rest of the code
+//     }
+//     res.status(200).json(single_user)
+// }
 
 //create a new workout
 const new_users = async(req, res) =>{
@@ -89,4 +108,4 @@ const renderLogIn = async(req, res) => {
 
 
 
-export {new_users, all_users, get_user, deleteUser, updateUser, renderLogIn};
+export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn};
