@@ -26,16 +26,17 @@ const get_user = async(req, res) => {
 
 //create a new workout
 const new_users = async(req, res) =>{
-    const {username, password, first_name, last_name} = req.body
+    const {username, password, first_name} = req.body
 
     //add doc to db
     try {
-        const user = await users.create({username, password, first_name, last_name})
-        res.status(200).json(user)
+        const user = await users.create({username, password, first_name})
+        res.status(200).redirect('/login')
+        //res.status(200).json(user)
     }
     catch (error)
     {
-        res.status(400).json({error: error.message})
+        res.status(400).json(req.body)
     }
 }
 
@@ -56,7 +57,7 @@ const deleteUser = async(req, res) =>
         return res.status(400).json({error: "No such user"}) //return to prevent it from running rest of the code
     }
 
-    res.status(200).json(delete_user)
+    res.status(200).redirect('/login')
 
 }
 
@@ -81,6 +82,11 @@ const updateUser = async(req, res) => {
 
 }
 
+//render the log in page:
+const renderLogIn = async(req, res) => {
+    res.render('Login');
+}
 
 
-export {new_users, all_users, get_user, deleteUser, updateUser};
+
+export {new_users, all_users, get_user, deleteUser, updateUser, renderLogIn};

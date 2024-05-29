@@ -10,12 +10,15 @@ router.get('/', functions.all_users)
 router.get('/:id', functions.get_user)
 
 //post a new workout
-router.post('/', functions.new_users)
+router.post('/signup', functions.new_users)
 
 //delete a new workout
 router.delete('/:id',functions.deleteUser)
 
 //update a new workout
 router.patch('/:id',functions.updateUser)
+
+//render requests
+router.get('/login', functions.renderLogIn);
 
 export default router
