@@ -21,15 +21,11 @@ Using nvm to run the right version https://github.com/nvm-sh/nvm
 3. run $ nvm install 16.20.2
 4. $ nvm use 16.20.2 
 
-## Setting up Dependencies
+## Setting up Dependencies + Running the App
 Client Side
 1. cd client
-2. npm install --legacy-peer-deps
-3. npm install react-typed --legacy-peer-deps
-4. npm install @material-ui/core --legacy-peer-deps
-5. npm install reactjs-popup --legacy-peer-deps
-6. npm install react-icons --save --legacy-peer-deps
-7. npm install react-router-dom --legacy-peer-deps
+2. npm install
+3. npm start
 
 
 Server Side
