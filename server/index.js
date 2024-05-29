@@ -2,11 +2,13 @@ import express from "express"
 import mongoose from "mongoose";
 import workoutRoutes from './routes/workouts.js';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 //express App
 const app = express()
 
 // middleware
 app.use(express.json())
+app.use(cors());
 
 app.use((req, res, next)=> {
     console.log(req.path, req.method)
