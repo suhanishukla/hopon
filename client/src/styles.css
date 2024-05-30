@@ -15,3 +15,12 @@
     font-size: 2rem;
   }
   
+  .home-container {
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(to right, #142847, #144282);
+    color: white;
+  }
