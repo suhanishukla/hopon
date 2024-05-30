@@ -109,7 +109,7 @@ export default function LogIn() {
                 width: '500px', // Set the width to 500px
               }}
             >
-              <Typography component="h1" variant="h4" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>
+              <Typography component="h1" variant="h4" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left' }}>
                 Welcome back.<br />
                 Sign in to your account
               </Typography>
