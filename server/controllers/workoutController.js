@@ -65,11 +65,11 @@ const new_users = async(req, res) =>{
 
 //create a new ride
 const rider = async(req, res) =>{
-    const {rideName, rideTime, passengers, start, end, distance} = req.body
+    const {rideName, rideTime, passengers, start, end, distance, uniqueID} = req.body
 
     //add doc to db
     try {
-        const rid = await ride.create({rideName, rideTime, passengers, start, end, distance})
+        const rid = await ride.create({rideName, rideTime, passengers, start, end, distance, uniqueID})
         res.status(200).json(rid)
     }
     catch (error)
