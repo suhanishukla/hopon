@@ -120,7 +120,7 @@ export default function LogIn() {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  name="email"
+                  name="username"
                   autoComplete="email"
                   autoFocus
                   value={formData.username}
