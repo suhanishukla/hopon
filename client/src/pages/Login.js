@@ -63,7 +63,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={containerStyle}>
+    <div className="background"> 
+      <div style={containerStyle}>
       <div style={loginBoxStyle}>
         <h2 style={{ fontSize: '20px', marginBottom: '20px', textAlign: 'center', fontFamily: '"Poppins", sans-serif', fontWeight: '600' }}>Log in</h2>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -92,6 +93,7 @@ export default function LoginPage() {
           New to HopOn? <span style={{ color: '#3d2814', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleSignUpClick}>Sign Up Now!</span>
         </div>
       </div>
+    </div>
     </div>
   );
 }
