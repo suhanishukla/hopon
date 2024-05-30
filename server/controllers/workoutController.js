@@ -1,5 +1,6 @@
 //the purpose of this file is to create a bunch of function to reference inside router file
 import users from "../models/workoutModels.js";
+import ride from "../models/rideModel.js";
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 
@@ -62,6 +63,20 @@ const new_users = async(req, res) =>{
     }
 }
 
+//create a new ride
+const rider = async(req, res) =>{
+    const {rideName, rideTime, passengers, start, end, distance} = req.body
+
+    //add doc to db
+    try {
+        const rid = await ride.create({rideName, rideTime, passengers, start, end, distance})
+        res.status(200).json(rid)
+    }
+    catch (error)
+    {
+        res.status(400).json(req.body)
+    }
+}
 
 //delete a workout
 const deleteUser = async(req, res) =>
@@ -111,4 +126,4 @@ const renderLogIn = async(req, res) => {
 
 
 
-export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn};
+export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider};
