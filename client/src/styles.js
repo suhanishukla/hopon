@@ -1,19 +1,41 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(() => ({
-  appBar: {
-    borderRadius: 15,
-    margin: '30px 0',
+const useStyles = makeStyles((theme) => ({
+  container: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: '100vh',
+  },
+  formContainer: {
+    flex: 1,
+    padding: theme.spacing(2),
+    margin: '20px',
+  },
+  mapContainer: {
+    flex: 2,
+    padding: theme.spacing(2),
+    margin: '20px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: '20px 0',
+  },
 
-  },
-  heading: {
-    color: 'rgba(0,183,255, 1)',
-  },
-  image: {
-    marginLeft: '15px',
-  },
+  createButton: {
+    backgroundColor: '#3d2814',
+    color: 'white',
+    padding: '10px',
+    borderRadius: '5px',
+    fontFamily: '"Poppins", sans-serif',
+    fontWeight: '600',
+    width: '100%',
+    marginTop: '20px',
+    cursor: 'pointer',
+  }
 }));
+
+export default useStyles;
