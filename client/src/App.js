@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import PostRide from './pages/PostRide';
 import Login from './pages/Login';
 import SignUp from './pages/Signup'; // Import SignUp component
+import YourRides from './pages/YourRides'; // Import SignUp component
 import Navbar from './components/Navbar'; // Adjust the path as necessary
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/Post a Ride" element={<PostRide/>} />
         <Route path="/LogIn" element={<Login/>} />
         <Route path="/SignUp" element={<SignUp/>} /> {/* Route to SignUp component */}
+        <Route path="/YourRides" element={<YourRides/>} />
       </Routes>
     </BrowserRouter>
   );
