@@ -1,25 +1,55 @@
-import React, { useState } from 'react';
+// 
+
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import '../styles.css'; 
+import Divider from '@mui/material/Divider';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const containerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  minHeight: '100vh',
-  paddingTop: '50px', // Adjust the padding top to position the box higher
-};
 
-const loginBoxStyle = {
-  width: '300px',
-  padding: '20px',
-  backgroundColor: '#F0EAD6',
-  color: '#3d2814',
-  borderRadius: '10px',
-  boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.1)',
-};
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-export default function LoginPage() {
+// TODO remove, this demo shouldn't need to reset the theme.
+
+const defaultTheme = createTheme();
+
+
+const horizontalLine = {
+  display: 'block',
+  width: '100%',
+  height: '1px',
+}
+
+export default function LogIn() {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -62,38 +92,134 @@ export default function LoginPage() {
     navigate('/signup');
   };
 
+
   return (
-    <div className="background"> 
-      <div style={containerStyle}>
-      <div style={loginBoxStyle}>
-        <h2 style={{ fontSize: '20px', marginBottom: '20px', textAlign: 'center', fontFamily: '"Poppins", sans-serif', fontWeight: '600' }}>Log in</h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-          <input
-            type="text"
-            placeholder="Email"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            style={{ marginBottom: '10px', width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            style={{ marginBottom: '20px', width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-          <div style={{ textAlign: 'center' }}>
-            <button type="submit" style={{ backgroundColor: '#3d2814', color: 'white', padding: '10px', borderRadius: '5px', fontFamily: '"Poppins", sans-serif', fontWeight: '600', border: 'none', cursor: 'pointer' }}>Log in</button>
-          </div>
-        </form>
-        {message && <p style={{ color: 'red', textAlign: 'center', marginTop: '10px' }}>{message}</p>}
-        <div style={{ marginTop: '20px', textAlign: 'center', fontFamily: '"Poppins", sans-serif', fontWeight: '600', fontSize: '14px' }}>
-          New to HopOn? <span style={{ color: '#3d2814', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleSignUpClick}>Sign Up Now!</span>
+        <div className="background">
+          <Container>
+          <div style={{ color: '#142847' }}> . </div>
+            <Box
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)', // White color with 30% opacity
+                padding: '40px',
+                borderRadius: '10px',
+                width: '500px', // Set the width to 500px
+              }}
+            >
+              <Typography component="h1" variant="h4" sx={{ color: 'white', fontWeight: 'bold', alignSelf: 'flex-start' }}>
+                Welcome back.<br />
+                Sign in to your account
+              </Typography>
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="username"
+                  autoComplete="email"
+                  autoFocus
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '40px',
+                      '& fieldset': {
+                        borderColor: 'white',
+                        borderWidth: '2px',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'white',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'white',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: 'white',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: 'white',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: 'white',
+                    },
+                  }}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '40px',
+                      '& fieldset': {
+                        borderColor: 'white',
+                        borderWidth: '2px',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'white',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'white',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        color: 'white',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: 'white',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: 'white',
+                    },
+                  }}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, borderRadius: '40px', backgroundColor: 'black', color: 'white' }}
+                >
+                  Sign In
+                </Button>
+                <Divider sx={{ borderColor: 'white' }}>
+                  <Typography variant="body2" sx={{ fontSize: '15px', color: 'white' }}>or</Typography>
+                </Divider>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    borderRadius: '40px',
+                    backgroundColor: 'transparent',
+                    textTransform: 'lowercase',
+                    border: '2px solid white',
+                    color: 'white',
+                  }}
+                  onClick={handleSignUpClick}
+                >
+                  Sign Up
+                </Button>
+              </Box>
+              {message && <Typography sx={{ color: 'red', textAlign: 'center', marginTop: '10px' }}>{message}</Typography>}
+            </Box>
+          </Container>
         </div>
-      </div>
-    </div>
-    </div>
-  );
-}
+      );
+    };
+    
+    
