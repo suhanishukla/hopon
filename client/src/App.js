@@ -31,7 +31,6 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup'; // Import SignUp component
 import YourRides from './pages/YourRides'; // Import SignUp component
 import Navbar from './components/Navbar'; // Adjust the path as necessary
-
 export default function App() {
   return (
     <BrowserRouter>
