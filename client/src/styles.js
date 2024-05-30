@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     padding: theme.spacing(2),
     margin: '20px',
+    backgroundColor: 'rgba(192, 192, 192, 0.2)',
   },
   mapContainer: {
     flex: 2,
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: '20px 0',
   },
-
   createButton: {
     backgroundColor: '#3d2814',
     color: 'white',
