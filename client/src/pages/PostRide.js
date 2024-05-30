@@ -100,6 +100,7 @@ const PostRide = () => {
   }
 
   return (
+    <div className="background"> 
     <div className={classes.container}>
       <Paper className={classes.formContainer}>
         <Typography variant="h6">Post a Ride</Typography>
@@ -164,6 +165,7 @@ const PostRide = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
