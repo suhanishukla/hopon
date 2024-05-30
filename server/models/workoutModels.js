@@ -17,10 +17,10 @@ const users = new Schema({
         required: true
     },
 
-    last_name: {
-        type: String,
-        required: true
-    }
+    // last_name: {
+    //     type: String,
+    //     required: true
+    // }
 }, {timestamps: true})
 
 export default mongoose.model('users',users)
