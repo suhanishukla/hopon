@@ -1,40 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
 
-
 export default function RidePopup({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
   const [popupHeight, setPopupHeight] = useState('auto');
-
 
   useEffect(() => {
     const baseHeight = 280;
     const passengerHeight = 50;
     const calculatedHeight = baseHeight + passengerList.length * passengerHeight;
 
-
     setPopupHeight(calculatedHeight);
   }, [passengerList]);
-
 
   const formatDate = (date) => {
     const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
     return new Date(date).toLocaleDateString(undefined, options);
   };
 
-
   const formatTime = (date) => {
     const options = { hour: 'numeric', minute: '2-digit', hour12: true };
     return new Date(date).toLocaleTimeString(undefined, options);
   };
 
-
   return (
     <Popup
-      trigger={<button>more info</button>}
+      trigger={<IoIosArrowForward style={{ fontSize: '24px' }} />}
       modal
       nested
       contentStyle={{
