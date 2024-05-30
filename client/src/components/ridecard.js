@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Card, CardActions, CardContent, Typography } from '@material-ui/core';
 import { IoMdPerson } from "react-icons/io";
 import { FaClock, FaArrowRight } from "react-icons/fa";
-import RidePopup from '../components/ridepopup';
+import RidePopup from './ridepopup';
 import { RxDot } from "react-icons/rx";
 import { IoIosArrowForward } from "react-icons/io";
 
