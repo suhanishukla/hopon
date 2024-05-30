@@ -1,6 +1,23 @@
 //the purpose of this file is to create a bunch of function to reference inside router file
 import users from "../models/workoutModels.js";
 import mongoose from "mongoose";
+import jwt from 'jsonwebtoken';
+
+//make secret key
+const SECRET_KEY = 'yourmomgae';
+
+
+//make a log in Token
+const generateToken = (user) => {
+    return jwt.sign(
+      {
+        id: user._id,
+        username: user.username,
+      },
+      SECRET_KEY,
+      { expiresIn: '1h' } // Token expiration time
+    );
+  };
 
 //get all workouts
 const all_users = async(req, res) => {
@@ -22,26 +39,12 @@ const loginUser = async (req, res) => {
         return res.status(404).json({ message: 'User not found or incorrect password' });
       }
   
-      res.status(200).json({ message: 'Login successful', user });
+      const token = generateToken(user);
+      res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
   };
-
-// const get_user = async(req, res) => {
-//     const {id} = req.params
-
-//     if (!mongoose.Types.ObjectId.isValid(id))
-//     {
-//         res.status(404).json({error: "No such user found"})
-//     }
-
-//     const single_user = await users.findById(id)
-//     if (!single_user){
-//         return res.status(404).json({error: "No such user"}) //return to prevent it from running rest of the code
-//     }
-//     res.status(200).json(single_user)
-// }
 
 //create a new workout
 const new_users = async(req, res) =>{
