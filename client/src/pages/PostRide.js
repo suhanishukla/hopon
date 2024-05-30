@@ -48,7 +48,32 @@ const PostRide = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const rideDetails = {rideName, rideTime, passengers, start, end, distance}
+    const token = sessionStorage.getItem('token');
+    let uniqueID = null
+    if (token) {
+      try {
+          // Parse the JWT token
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          
+          // Access the information from the token
+          console.log(decodedToken);
+          
+          // Example: Accessing user ID
+          const userId = decodedToken.id;
+          uniqueID = userId
+          console.log("User ID:", userId);
+          
+          // Example: Accessing expiration time
+          const expirationTime = new Date(decodedToken.exp * 1000); // Convert UNIX timestamp to milliseconds
+          console.log("Expiration Time:", expirationTime);
+      } catch (error) {
+          console.error("Error parsing JWT token:", error);
+      }
+    } else {
+        console.error("JWT token not found in session storage");
+    }
+
+    const rideDetails = {rideName, rideTime, passengers, start, end, distance, uniqueID}
     const response = await fetch('http://localhost:4000/api/workouts/rider', 
       {
         method: 'POST',
@@ -100,6 +125,7 @@ const PostRide = () => {
   }
 
   return (
+    <div className="background"> 
     <div className={classes.container}>
       <Paper className={classes.formContainer}>
         <Typography variant="h6">Post a Ride</Typography>
@@ -164,6 +190,7 @@ const PostRide = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

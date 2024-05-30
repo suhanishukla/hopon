@@ -24,3 +24,9 @@
     background: linear-gradient(to right, #142847, #144282);
     color: white;
   }
+
+  .background {
+    height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(to right, #142847, #144282);
+    color: white;
+  }
