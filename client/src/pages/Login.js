@@ -104,12 +104,12 @@ export default function LogIn() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 backgroundColor: 'rgba(255, 255, 255, 0.3)', // White color with 30% opacity
-                padding: '20px',
+                padding: '40px',
                 borderRadius: '10px',
                 width: '500px', // Set the width to 500px
               }}
             >
-              <Typography component="h1" variant="h4" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left' }}>
+              <Typography component="h1" variant="h4" sx={{ color: 'white', fontWeight: 'bold', alignSelf: 'flex-start' }}>
                 Welcome back.<br />
                 Sign in to your account
               </Typography>
