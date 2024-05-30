@@ -1,5 +1,12 @@
 import React from 'react';
+import '../styles.css'; 
 
-export default function Home() {
-  return <h1>Home Page</h1>;
-}
+const Home = () => {
+  return (
+    <div className="home-container">
+      <h1>Welcome to Our Website</h1>
+    </div>
+  );
+};
+
+export default Home;
