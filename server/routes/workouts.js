@@ -21,4 +21,7 @@ router.patch('/:id',functions.updateUser)
 //render requests
 router.get('/login', functions.renderLogIn);
 
+//post form data into rideModel DataBase
+router.post('/rider', functions.rider)
+
 export default router
