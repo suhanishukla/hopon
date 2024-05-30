@@ -45,8 +45,29 @@ const PostRide = () => {
     }
   }, [isLoaded]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const rideDetails = {rideName, rideTime, passengers, start, end, distance}
+    const response = await fetch('http://localhost:4000/api/workouts/rider', 
+      {
+        method: 'POST',
+        body: JSON.stringify(rideDetails),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    const json = await response.json()
+
+    if (response.ok)
+      {
+        console.log("Ride Added")
+      }
+    else
+    {
+      console.log(json.error)
+    }
 
     // Makes sure that both the start and end destination have been set
     if (start && end) {
