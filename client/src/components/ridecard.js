@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
-import { Box, Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import React from 'react';
+import { Box, Card, CardActions, CardContent, Typography, IconButton } from '@material-ui/core';
 import { IoMdPerson } from "react-icons/io";
-import { FaClock, FaArrowRight } from "react-icons/fa";
+import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import RidePopup from '../components/ridepopup';
 import { RxDot } from "react-icons/rx";
-import { IoIosArrowForward } from "react-icons/io";
 
-const items1 = [
-  { name: 'pity party on wheels', spacing: '20px', fontSize: '30px' },
-  { name: <><IoMdPerson /> 4</>, spacing: '10px', fontSize: '15px' },
-  { name: <><FaClock /> 4:30 PM</>, spacing: '15px', fontSize: '15px' }
-];
-
-export default function RideCard() {
+export default function RideCard({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
   const bull = (
     <Box
       component="span"
       sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-    </Box>
+    />
   );
 
+  const items1 = [
+    { name: ridename, spacing: '20px', fontSize: '30px' },
+    { name: <><IoMdPerson /> {totalPassengers}</>, spacing: '10px', fontSize: '15px' },
+    { name: <><FaCalendarAlt /> {formatDate(date)}</>, spacing: '15px', fontSize: '15px' },
+    { name: <><FaClock /> {formatTime(time)}</>, spacing: '15px', fontSize: '15px' }
+  ];
+
+  function formatDate(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const formattedDate = dateTime.toLocaleDateString();
+    return formattedDate;
+  }
+
+  function formatTime(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const formattedTime = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return formattedTime;
+  }
+
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined" sx={{ borderWidth: '2px', borderColor: '#3d2814' }}>
+    <Box sx={{ minWidth: 275, padding: '20px' }}>
+      <Card variant="outlined" style={{ borderWidth: '2px', borderColor: '#3d2814', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
         <CardContent className="cardContent" style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>
             {items1.map((item, index) => (
@@ -33,28 +44,25 @@ export default function RideCard() {
               </span>
             ))}
             <Typography sx={{ mb: 0.5, mt: 2 }} color="#3d2814">
-              <RxDot /> UCLA
-              <br/>
-              <RxDot /> USC
+              <RxDot /> {startLocation}
+              <br />
+              <RxDot /> {endLocation}
             </Typography>
           </div>
           <div>
             <CardActions sx={{ justifyContent: 'flex-end', mt: 4 }}>
-              {/* Use RidePopup component here */}
-              <RidePopup
-                ridename="carpool to usc"
-                startLocation="UCLA"
-                endLocation="USC"
-                date="2024-05-15"
-                time="2024-05-15T10:00:00"
-                totalPassengers={4}
-                passengerList={[
-                  { name: "passenger #1", isCrown: true },
-                  { name: "passenger #2", isCrown: false },
-                  { name: "passenger #3", isCrown: false }
-                ]}
-                additionalInfo="We will be meeting at the parking lot and I will drive us. It will be $20 per person!"
-              />
+              <IconButton>
+                <RidePopup
+                  ridename={ridename}
+                  startLocation={startLocation}
+                  endLocation={endLocation}
+                  date={date}
+                  time={time}
+                  totalPassengers={totalPassengers}
+                  passengerList={passengerList}
+                  additionalInfo={additionalInfo}
+                />
+              </IconButton>
             </CardActions>
           </div>
         </CardContent>

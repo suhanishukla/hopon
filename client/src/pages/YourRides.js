@@ -2,41 +2,49 @@ import React from 'react';
 import RidePopup from '../components/ridepopup';
 import RideCard from '../components/RideCard';
 
-export default function FindRide() {
-  const yourRidesStyle = {
-    fontFamily: '"Poppins", sans-serif', // Apply font family
-  };
+const containerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  minHeight: '100vh',
+  paddingTop: '50px', // Adjust the padding top to position the box higher
+  backgroundColor: '#F0EAD6', // Blueish background color
+  width: '100%', // Make the container take up the whole width
+};
 
-  const ridesHeadingStyle = {
-    marginLeft: '20px', // Adjust the left margin
-  };
+const yourRidesStyle = {
+  fontFamily: '"Poppins", sans-serif', // Apply font family
+  width: '100%', // Make the content take up the whole width
+};
+
+const ridesHeadingStyle = {
+  marginLeft: '20px', // Adjust the left margin
+  width: '100%', // Make the heading take up the whole width
+};
+
+export default function FindRide() {
+  const upcomingRides = [
+    { ridename: "Carpool to USC", startLocation: "UCLA", endLocation: "USC", date: "2024-05-15", time: "2024-05-15T10:00:00", totalPassengers: 4, passengerList: [], additionalInfo: "We will be meeting at the parking lot and I will drive us. It will be $20 per person!" },
+    // Add more upcoming rides as needed
+  ];
+
+  const pastRides = [
+    // Add past rides data similarly
+  ];
 
   return (
-    <div style={yourRidesStyle}>
-      <h2 style={ridesHeadingStyle}>Upcoming Rides</h2>
-      <RidePopup
-               ridename="Carpool to USC"
-               startLocation="UCLA"
-               endLocation="USC"
-               date="2024-05-15"
-               time="2024-05-15T10:00:00"
-               totalPassengers={4}
-               passengerList={[
-                   { name: "Passenger #1", isCrown: true },
-                   { name: "Passenger #2", isCrown: false },
-                   { name: "Passenger #3", isCrown: false }
-               ]}
-               additionalInfo="We will be meeting at the parking lot and I will drive us. It will be $20 per person!"
-           />
-      <RideCard />
-      <RideCard />
-      {/* Add more upcoming ride cards as needed */}
-      
-      <h2 style={ridesHeadingStyle}>Past Rides</h2>
-      <RideCard />
-      <RideCard />
-      <RideCard />
-      {/* Add more past ride cards as needed */}
+    <div className="background" style={containerStyle}> 
+      <div style={yourRidesStyle}>
+        <h2 style={ridesHeadingStyle}>Upcoming Rides</h2>
+        {upcomingRides.map((ride, index) => (
+          <RideCard key={index} {...ride} />
+        ))}
+        
+        <h2 style={ridesHeadingStyle}>Past Rides</h2>
+        {pastRides.map((ride, index) => (
+          <RideCard key={index} {...ride} />
+        ))}
+      </div>
     </div>
   );
 }
