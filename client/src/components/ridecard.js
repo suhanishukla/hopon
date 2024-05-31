@@ -1,8 +1,8 @@
-import React from 'react';
-import { Box, Card, CardActions, CardContent, Typography, IconButton } from '@material-ui/core';
-import { IoMdPerson } from "react-icons/io";
+import * as React from 'react';
+import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import RidePopup from '../components/ridepopup';
+import { IoMdPerson } from "react-icons/io";
 import { RxDot } from "react-icons/rx";
 
 export default function RideCard({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
@@ -13,37 +13,39 @@ export default function RideCard({ ridename, startLocation, endLocation, date, t
     />
   );
 
+  function formatDate(dateString) {
+    const options = { month: 'long', day: 'numeric' };
+    const utcDate = new Date(dateString + 'T00:00:00Z'); 
+    return utcDate.toLocaleDateString('en-US', options);
+  }
+
+  function formatTime(timeString) {
+    const [hour, minute] = timeString.split(':');
+    let hour12 = parseInt(hour);
+    const ampm = hour12 >= 12 ? 'PM' : 'AM';
+    hour12 = hour12 % 12 || 12;
+    return `${hour12}:${minute} ${ampm}`;
+  }
+
   const items1 = [
     { name: ridename, spacing: '20px', fontSize: '30px' },
-    { name: <><IoMdPerson /> {totalPassengers}</>, spacing: '10px', fontSize: '15px' },
     { name: <><FaCalendarAlt /> {formatDate(date)}</>, spacing: '15px', fontSize: '15px' },
-    { name: <><FaClock /> {formatTime(time)}</>, spacing: '15px', fontSize: '15px' }
+    { name: <><FaClock /> {formatTime(time)}</>, spacing: '15px', fontSize: '15px' },
+    { name: <><IoMdPerson /> {totalPassengers}</>, spacing: '10px', fontSize: '15px' }
   ];
 
-  function formatDate(dateTimeString) {
-    const dateTime = new Date(dateTimeString);
-    const formattedDate = dateTime.toLocaleDateString();
-    return formattedDate;
-  }
-
-  function formatTime(dateTimeString) {
-    const dateTime = new Date(dateTimeString);
-    const formattedTime = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return formattedTime;
-  }
-
   return (
-    <Box sx={{ minWidth: 275, padding: '20px' }}>
-      <Card variant="outlined" style={{ borderWidth: '2px', borderColor: '#3d2814', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
-        <CardContent className="cardContent" style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Box sx={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+      <Card variant="outlined" style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: '10px' }}>
+        <CardContent className="cardContent" style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontFamily: 'Poppins, sans-serif' }}>
           <div>
             {items1.map((item, index) => (
-              <span key={index} style={{ marginRight: item.spacing, fontSize: item.fontSize }} >
+              <span key={index} style={{ marginRight: item.spacing, fontSize: item.fontSize, fontFamily: 'Poppins, sans-serif' }} >
                 {item.name}
                 {index !== items1.length - 1 && bull}
               </span>
             ))}
-            <Typography sx={{ mb: 0.5, mt: 2 }} color="#3d2814">
+            <Typography sx={{ mb: 0.5, mt: 2, fontFamily: 'Poppins, sans-serif' }} color="white">
               <RxDot /> {startLocation}
               <br />
               <RxDot /> {endLocation}

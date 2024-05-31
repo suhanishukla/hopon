@@ -7,8 +7,8 @@ export default function FindRide() {
     ridename: "carpool to USC",
     startLocation: "UCLA",
     endLocation: "USC",
-    date: "2024-05-17",
-    time: "2024-05-17T10:00:00",
+    date: "2024-06-17",
+    time: "10:00:00",
     totalPassengers: 5,
     passengerList: [
       { name: "passenger #1", isCrown: true },
