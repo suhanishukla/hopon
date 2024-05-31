@@ -1,5 +1,5 @@
 .nav {
-  background-color: #0F192A;
+  background-color: #111111;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,7 +73,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #1B2021;
+  background-color: #111111;
   padding: 0.5em 0;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -89,7 +89,7 @@
   cursor: pointer;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 .dropdown-content a:hover, .dropdown-content button:hover {
