@@ -119,56 +119,61 @@ const PostRide = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const token = sessionStorage.getItem('token');
-    let uniqueID = null;
-    if (token) {
-      try {
-        const decodedToken = JSON.parse(atob(token.split('.')[1]));
-        const userId = decodedToken.id;
-        uniqueID = userId;
-      } catch (error) {
-        console.error("Error parsing JWT token:", error);
-      }
-    } else {
-      console.error("JWT token not found in session storage");
-    }
+    const token = sessionStorage.getItem('token');
+    let uniqueID = null;
+    if (token) {
+      try {
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const userId = decodedToken.id;
+        uniqueID = userId;
 
-    const rideDetails = { rideName, rideTime, passengers, start, end, distance, uniqueID };
-    const response = await fetch('http://localhost:4000/api/workouts/rider', {
-      method: 'POST',
-      body: JSON.stringify(rideDetails),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const json = await response.json();
+        if (start && end) {
+          const directionsService = new window.google.maps.DirectionsService();
+          directionsService.route(
+            {
+              origin: start,
+              destination: end,
+              travelMode: window.google.maps.TravelMode.DRIVING,
+            },
+            async (result, status) => {
+              if (status === window.google.maps.DirectionsStatus.OK) {
+                setDirections(result);
+                const distanceInKm = result.routes[0].legs[0].distance.text;
+                setDistance(distanceInKm);
 
-    if (response.ok) {
-      console.log("Ride Added");
-    } else {
-      console.log(json.error);
-    }
+                const rideDetails = { rideName, rideTime, passengers, start, end, distance: distanceInKm, uniqueID };
+                const response = await fetch('http://localhost:4000/api/workouts/rider', {
+                  method: 'POST',
+                  body: JSON.stringify(rideDetails),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+                const json = await response.json();
 
-    if (start && end) {
-      const directionsService = new window.google.maps.DirectionsService();
-      directionsService.route(
-        {
-          origin: start,
-          destination: end,
-          travelMode: window.google.maps.TravelMode.DRIVING,
-        },
-        (result, status) => {
-          if (status === window.google.maps.DirectionsStatus.OK) {
-            setDirections(result);
-            const distanceInKm = result.routes[0].legs[0].distance.text;
-            setDistance(distanceInKm);
-          } else {
-            console.error(`Error fetching directions ${result}`);
-          }
-        }
-      );
-    }
-  };
+                if (response.ok) {
+                  console.log("Ride Added");
+                } else {
+                  console.log(json.error);
+                }
+              } 
+              else {
+                console.error(`Error fetching directions ${result}`);
+              }
+            }
+          );
+      }
+
+      } 
+      catch (error) 
+      {
+        console.error("Error parsing JWT token:", error);
+      }
+    } 
+    else {
+      console.error("JWT token not found in session storage");
+    }
+  };
 
   if (!isLoaded) {
     return <div>Loading...</div>;
