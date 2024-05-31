@@ -6,6 +6,8 @@ const router = express.Router();
 //get all workouts
 router.get('/getRide', functions.all_users)
 
+router.get('/userRides', functions.getUserRides);
+
 //get a single workout
 router.post('/login', functions.loginUser);
 
