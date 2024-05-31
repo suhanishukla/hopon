@@ -1,5 +1,4 @@
 import React from 'react';
-import RidePopup from '../components/ridepopup';
 import RideCard from '../components/RideCard';
 
 const containerStyle = {
@@ -22,16 +21,16 @@ const ridesHeadingStyle = {
   width: '100%', // Make the heading take up the whole width
 };
 
+const upcomingRides = [
+  { ridename: "Carpool to USC", startLocation: "UCLA", endLocation: "USC", date: "2024-05-15", time: "2024-05-15T10:00:00", totalPassengers: 4, passengerList: [], additionalInfo: "We will be meeting at the parking lot and I will drive us. It will be $20 per person!" },
+  // Add more upcoming rides as needed
+];
+
+const pastRides = [
+  // Add past rides data similarly
+];
+
 export default function FindRide() {
-  const upcomingRides = [
-    { ridename: "Carpool to USC", startLocation: "UCLA", endLocation: "USC", date: "2024-05-15", time: "2024-05-15T10:00:00", totalPassengers: 4, passengerList: [], additionalInfo: "We will be meeting at the parking lot and I will drive us. It will be $20 per person!" },
-    // Add more upcoming rides as needed
-  ];
-
-  const pastRides = [
-    // Add past rides data similarly
-  ];
-
   return (
     <div className="background" style={containerStyle}> 
       <div style={yourRidesStyle}>
