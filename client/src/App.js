@@ -24,6 +24,7 @@ export default function App() {
         <Route path="/your-rides" element={<PrivateRoute element={<YourRides />} />} />
         <Route path="/LogIn" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/YourRides" element={<YourRides />} />
       </Routes>
     </BrowserRouter>
   );
