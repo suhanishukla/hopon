@@ -22,7 +22,7 @@ const generateToken = (user) => {
 
 //get all workouts
 const all_users = async(req, res) => {
-    const everyone = await users.find({}).sort({createdAt: -1}) //sort by descending order
+    const everyone = await ride.find({}).sort({createdAt: -1}) //sort by descending order
     res.status(200).json(everyone) //gives us user documents in an array
 }
 

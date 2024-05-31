@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
-import RidePopup from '../components/ridepopup';
+import RidePopup from './ridepopup';
 import { IoMdPerson } from "react-icons/io";
 import { RxDot } from "react-icons/rx";
 
