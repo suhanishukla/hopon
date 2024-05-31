@@ -1,12 +1,16 @@
 .nav {
-  background-color: #1B2021;
+  background-color: #0F192A;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1em;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .nav a, .nav button {
@@ -15,13 +19,13 @@
   text-decoration: none;
   margin: 0 1em;
   padding: 0.5em 1em;
-  z-index: 1; /* Ensure text is above the pseudo-element */
-  background: none; /* Remove default button background */
-  border: none; /* Remove default button border */
-  cursor: pointer; /* Add pointer cursor for button */
-  font-family: 'Arial', sans-serif; /* Ensure font style is applied */
-  font-weight: bold; /* Ensure font weight is applied */
-  font-size: 1.2em; /* Ensure font size is applied */
+  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 .nav a::after, .nav button::after {
@@ -34,8 +38,8 @@
   background-color: rgba(255, 255, 255, 0.2);
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: -1; /* Ensure the box is behind the text */
-  border-radius: 10px; /* Make the box rounded */
+  z-index: -1;
+  border-radius: 20px;
 }
 
 .nav a:hover::after, .nav button:hover::after {
@@ -56,6 +60,13 @@
   position: relative;
 }
 
+.profile-button {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+}
+
 .dropdown-content {
   display: flex;
   flex-direction: column;
@@ -65,7 +76,7 @@
   background-color: #1B2021;
   padding: 0.5em 0;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 10px; /* Make the box rounded */
+  border-radius: 10px;
 }
 
 .dropdown-content a, .dropdown-content button {
@@ -78,10 +89,14 @@
   cursor: pointer;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
 .dropdown-content a:hover, .dropdown-content button:hover {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
+}
+
+.main-content {
+  padding-top: 80px; /* Adjust this based on the height of your nav bar */
 }
