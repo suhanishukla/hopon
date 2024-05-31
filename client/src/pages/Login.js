@@ -126,7 +126,7 @@ export default function LogIn() {
                   value={formData.username}
                   onChange={handleInputChange}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                  '& .MuiOutlinedInput-root': {
                       borderRadius: '40px',
                       '& fieldset': {
                         borderColor: 'white',
@@ -140,6 +140,11 @@ export default function LogIn() {
                       },
                       '& .MuiOutlinedInput-input': {
                         color: 'white',
+                        '&:-webkit-autofill': {
+                          '-webkit-box-shadow': '0 0 0 30px rgba(255, 255, 255, 0.3) inset',
+                          '-webkit-text-fill-color': 'white',
+                          'transition': 'background-color 5000s ease-in-out 0s',
+                        },
                       },
                     },
                     '& .MuiInputLabel-root': {
@@ -176,6 +181,11 @@ export default function LogIn() {
                       },
                       '& .MuiOutlinedInput-input': {
                         color: 'white',
+                        '&:-webkit-autofill': {
+                          '-webkit-box-shadow': '0 0 0 30px rgba(255, 255, 255, 0.3) inset',
+                          '-webkit-text-fill-color': 'white',
+                          'transition': 'background-color 5000s ease-in-out 0s',
+                        },
                       },
                     },
                     '& .MuiInputLabel-root': {

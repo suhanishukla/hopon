@@ -4,7 +4,7 @@ import * as functions from '../controllers/workoutController.js';
 const router = express.Router();
 
 //get all workouts
-router.get('/', functions.all_users)
+router.get('/getRide', functions.all_users)
 
 //get a single workout
 router.post('/login', functions.loginUser);
