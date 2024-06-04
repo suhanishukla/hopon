@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
@@ -20,7 +19,7 @@ function formatTime(timeString) {
   return `${hour12}:${minute} ${ampm}`;
 }
 
-export default function RidePopup({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
+export default function RidePopup({ isOpen, onClose, ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
   const [popupHeight, setPopupHeight] = useState('auto');
 
   useEffect(() => {
@@ -33,18 +32,23 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
 
   return (
     <Popup
-      trigger={<IoIosArrowForward style={{ fontSize: '24px', color: 'white' }} />}
+      open={isOpen}
+      onClose={onClose}
       modal
       nested
       contentStyle={{
         width: '35%',
         padding: '20px',
         borderRadius: '10px',
+        minHeight: '380px', 
         height: popupHeight,
         fontFamily: '"Poppins", sans-serif',
-        backgroundColor: 'rgba(255, 255, 255, 0.3)', // White color with 30% opacity
-        backdropFilter: 'blur(5px)', // Apply a blur effect to the background
-        boxShadow: 'none', // Remove the box shadow
+        backgroundColor: 'transparent', 
+        boxShadow: 'none', 
+        backgroundImage: 'linear-gradient(#00326F , transparent), linear-gradient(to top left, #4F2F98, transparent), linear-gradient(to top right, #10274E, transparent)', // Apply the gradient background
+        backgroundBlendMode: 'screen', 
+        color: 'white', 
+        position: 'relative',
       }}
     >
       {(close) => (
@@ -98,37 +102,37 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-            {passengerList.map((passenger, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
-                {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
-                <span>{passenger.name}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
-          <button 
-  onClick={close} 
-  style={{
-    fontSize: '16px', 
-    padding: '10px 20px', 
-    backgroundColor: 'transparent', 
-    border: '2px solid white', 
-    borderRadius: '40px', 
-    color: 'white', 
-    fontFamily: '"Poppins", sans-serif', 
-    fontWeight: '600', 
-    transition: 'background-color 0.3s ease', // Adding transition for smooth color change
-    cursor: 'pointer', // Change cursor to pointer on hover
-  }}
-  // Adding hover effect
-  onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
-  onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
->
-  Join Ride
-</button>
-
+          <div style={{ marginTop: '20px' }}> {}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {passengerList.map((passenger, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                  {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
+                  {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
+                  <span>{passenger.name}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
+              <button
+                onClick={onClose}
+                style={{
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+              >
+                Join Ride
+              </button>
+            </div>
           </div>
         </div>
       )}
