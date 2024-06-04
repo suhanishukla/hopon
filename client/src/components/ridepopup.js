@@ -23,12 +23,18 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
   const [popupHeight, setPopupHeight] = useState('auto');
 
   useEffect(() => {
-    const baseHeight = 280;
+    const baseHeight = 380;
     const passengerHeight = 50;
-    const calculatedHeight = baseHeight + passengerList.length * passengerHeight;
-
-    setPopupHeight(calculatedHeight);
-  }, [passengerList]);
+    const additionalInfoHeight = additionalInfo ? 50 : 0; 
+  
+    const calculatedHeight = baseHeight + passengerList.length * passengerHeight + additionalInfoHeight;
+  
+    const finalHeight = Math.max(calculatedHeight, baseHeight);
+  
+    setPopupHeight(finalHeight);
+  }, [passengerList, additionalInfo]);
+  
+  
 
   return (
     <Popup
@@ -139,3 +145,7 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
     </Popup>
   );
 }
+
+
+
+
