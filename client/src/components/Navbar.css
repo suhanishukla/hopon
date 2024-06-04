@@ -1,48 +1,102 @@
 .nav {
-    background-color: #1B2021;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-  
-  .nav a {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    margin: 0 1em;
-    padding: 0.5em 1em;
-    z-index: 1; /* Ensure text is above the pseudo-element */
-  }
-  
-  .nav a::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1; /* Ensure the box is behind the text */
-    border-radius: 10px; /* Make the box rounded */
-  }
-  
-  .nav a:hover::after {
-    opacity: 1;
-  }
-  
-  .nav-left {
-    flex: 1;
-  }
-  
-  .nav-right {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-  }
-  
+  background-color: #111111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav a, .nav button {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  margin: 0 1em;
+  padding: 0.5em 1em;
+  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.nav a::after, .nav button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: 20px;
+}
+
+.nav a:hover::after, .nav button:hover::after {
+  opacity: 1;
+}
+
+.nav-left {
+  flex: 1;
+}
+
+.nav-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-button {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #111111;
+  padding: 0.5em 0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.dropdown-content a, .dropdown-content button {
+  color: white;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.dropdown-content a:hover, .dropdown-content button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.main-content {
+  padding-top: 80px; /* Adjust this based on the height of your nav bar */
+}

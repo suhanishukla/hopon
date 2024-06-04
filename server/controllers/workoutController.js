@@ -22,9 +22,31 @@ const generateToken = (user) => {
 
 //get all workouts
 const all_users = async(req, res) => {
-    const everyone = await users.find({}).sort({createdAt: -1}) //sort by descending order
+    const everyone = await ride.find({}).sort({createdAt: -1}) //sort by descending order
     res.status(200).json(everyone) //gives us user documents in an array
 }
+
+const getUserRides = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const userId = decoded.id;
+    const userRides = await ride.find({ uniqueID: userId }).sort({ createdAt: -1 });
+
+    if (!userRides) {
+      return res.status(404).json({ message: 'No rides found for this user' });
+    }
+
+    res.status(200).json(userRides);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch rides', error });
+  }
+};
 
 //get a single workout
 const loginUser = async (req, res) => {
@@ -47,6 +69,9 @@ const loginUser = async (req, res) => {
     }
   };
 
+// In your workoutController.js
+
+
 //create a new workout
 const new_users = async(req, res) =>{
     const {username, password, first_name} = req.body
@@ -65,11 +90,11 @@ const new_users = async(req, res) =>{
 
 //create a new ride
 const rider = async(req, res) =>{
-    const {rideName, rideTime, passengers, start, end, distance} = req.body
+    const {rideName, rideTime, passengers, start, end, distance, uniqueID} = req.body
 
     //add doc to db
     try {
-        const rid = await ride.create({rideName, rideTime, passengers, start, end, distance})
+        const rid = await ride.create({rideName, rideTime, passengers, start, end, distance, uniqueID})
         res.status(200).json(rid)
     }
     catch (error)
@@ -126,4 +151,4 @@ const renderLogIn = async(req, res) => {
 
 
 
-export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider};
+export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider, getUserRides};

@@ -32,6 +32,12 @@ const ride = new Schema({
         required: true
     },
 
+    uniqueID: {
+        type: String,
+        required: true
+    },
+
+
 }, {timestamps: true})
 
 export default mongoose.model('ride',ride)

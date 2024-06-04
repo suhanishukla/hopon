@@ -4,6 +4,7 @@
   
   body {
     margin: 0;
+    padding-top: 75px
   }
   
   .container {
@@ -20,7 +21,24 @@
     display: flex;
     justify-content: center;
     text-align: left;
-    background: linear-gradient(to right, #142847, #144282);
+    align-items: center;
+    /* background: linear-gradient(to right, #142847, #144282); */
+    background:
+    linear-gradient(#00326F , transparent),
+    linear-gradient(to top left, #4F2F98, transparent),
+    linear-gradient(to top right, #10274E, transparent);
+    background-blend-mode: screen;
+    color: white;
+  }
+
+  .background {
+    min-height: 100vh; /* Full height of the viewport */
+    height: 100%;
+    background:
+    linear-gradient(#00326F , transparent),
+    linear-gradient(to top left, #4F2F98, transparent),
+    linear-gradient(to top right, #10274E, transparent);
+    background-blend-mode: screen;
     color: white;
   }
   .box {
