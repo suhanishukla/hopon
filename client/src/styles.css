@@ -4,7 +4,7 @@
   
   body {
     margin: 0;
-    padding-top: 75px
+    //padding-top: 75px
   }
   
   .container {
@@ -60,7 +60,6 @@
     width: 80%;
     align-self: center;
     margin-left: 100px;
-    margin-top: 70px;
   }
   .car {
     width: 20%;
@@ -73,7 +72,7 @@
     font-family: 'Poppins', sans-serif;
     color: white; 
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.7em;
     white-space: nowrap;
     margin-top: 100px; /* Adjust this value to move the text down */
 
@@ -99,10 +98,17 @@
   }
   .gif-container img {
     visibility: hidden;
-    width: 450px;
+    width: 475px;
   }
   .start:hover + .gif-container img {
     visibility: visible;
+  }
+  .typed-text {
+    margin-top: 60px;
+    margin-left: 50px;
+    font-family: 'Arial', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
   }
 
   
