@@ -31,7 +31,8 @@ Client Side
 Server Side
 1. cd server
 2. npm install body-parser cors express mongoose nodemon
+3. npm start
 
-Run npm start in client. 
+Open 2 terminals for client and server and run npm start in both. 
 
 
