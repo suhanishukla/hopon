@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import RideCard from '../components/RideCard';
+import RideCard from '../components/ridecard';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { TextField, Button, Paper, Typography, makeStyles } from '@material-ui/core';
 
