@@ -4,7 +4,7 @@
   
   body {
     margin: 0;
-    //padding-top: 75px
+    padding-top: 75px
   }
   
   .container {
@@ -43,6 +43,7 @@
   }
   .box {
     flex: 1; 
+    border: 1px solid #ccc; /* Border for visualization */
     align-items: center;
   }
   .custom-h1 {
@@ -91,6 +92,7 @@
   }
   
   .gif-container {
+    display: inline-block; 
     width: 50%;
     margin-top: 100px;
   }
@@ -108,5 +110,3 @@
     font-size: 40px;
     font-weight: 600;
   }
-
-  
