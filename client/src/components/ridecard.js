@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import RidePopup from './ridepopup';
