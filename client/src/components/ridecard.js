@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import RidePopup from './ridepopup';
 import { IoMdPerson } from "react-icons/io";
 import { RxDot } from "react-icons/rx";
 
-export default function RideCard({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
+export default function RideCard({ ridename, date, startLocation, endLocation, time, totalPassengers, passengerList, additionalInfo }) {
   const bull = (
     <Box
       component="span"
@@ -15,8 +15,8 @@ export default function RideCard({ ridename, startLocation, endLocation, date, t
 
   function formatDate(dateString) {
     const options = { month: 'long', day: 'numeric' };
-    const utcDate = new Date(dateString + 'T00:00:00Z'); 
-    return utcDate.toLocaleDateString('en-US', options);
+    const dateObj = new Date(dateString);
+    return dateObj.toLocaleDateString('en-US', options);
   }
 
   function formatTime(timeString) {
@@ -46,6 +46,7 @@ export default function RideCard({ ridename, startLocation, endLocation, date, t
 
   return (
     <Box sx={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+
       <Card 
         variant="outlined" 
         sx={{ 
@@ -76,20 +77,17 @@ export default function RideCard({ ridename, startLocation, endLocation, date, t
           <div>
             <CardActions sx={{ justifyContent: 'flex-end', mt: 4 }}>
               <IconButton>
-                {popupOpen && (
-                  <RidePopup
-                    isOpen={popupOpen}
-                    onClose={handleClose}
-                    ridename={ridename}
-                    startLocation={startLocation}
-                    endLocation={endLocation}
-                    date={date}
-                    time={time}
-                    totalPassengers={totalPassengers}
-                    passengerList={passengerList}
-                    additionalInfo={additionalInfo}
-                  />
-                )}
+                <RidePopup
+                  ridename={ridename}
+                  date={date}
+                  startLocation={startLocation}
+                  endLocation={endLocation}
+                  time={time}
+                  totalPassengers={totalPassengers}
+                  passengerList={passengerList}
+                  additionalInfo={additionalInfo}
+                />
+
               </IconButton>
             </CardActions>
           </div>

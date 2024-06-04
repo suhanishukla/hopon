@@ -7,6 +7,11 @@ const ride = new Schema({
         required: true
     },
 
+    rideDate: {
+        type: String,
+        required: true
+    },
+
     rideTime: {
         type: String,
         required: true
