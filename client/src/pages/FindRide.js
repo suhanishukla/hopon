@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '570px',
     overflowY: 'auto',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: '10px',
+    borderRadius: '12px',
     padding: '20px',
   },
   resultsContainer: {
