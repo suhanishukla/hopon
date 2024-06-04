@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     flex: 1,
     padding: theme.spacing(2),
-    marginTop: '65px',
+    marginTop: '22px',
     alignItems: 'center',
     margin: '30px',
-    maxHeight: '570px',
+    maxHeight: '655px',
     overflowY: 'auto',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: '10px',
+    borderRadius: '12px',
     padding: '20px',
   },
   mapContainer: {
@@ -99,6 +99,7 @@ const PostRide = () => {
   const [end, setEnd] = useState(null);
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState('');
+  const [description, setDescription] = useState('');
   const [mapCenter, setMapCenter] = useState({ lat: 34.0689, lng: -118.4452 });
 
   const startRef = useRef(null);
@@ -142,7 +143,7 @@ const PostRide = () => {
       console.error("JWT token not found in session storage");
     }
 
-    const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance, uniqueID };
+    const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance, description, uniqueID };
     const response = await fetch('http://localhost:4000/api/workouts/rider', {
       method: 'POST',
       body: JSON.stringify(rideDetails),
@@ -252,6 +253,17 @@ const PostRide = () => {
               inputRef={endRef}
               label="Ending Destination"
               fullWidth
+              margin="normal"
+              variant="outlined"
+              className={classes.textField}
+            />
+            <TextField
+              label="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              fullWidth
+              multiline
+              rows={2}
               margin="normal"
               variant="outlined"
               className={classes.textField}
