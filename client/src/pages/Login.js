@@ -216,7 +216,6 @@ export default function LogIn() {
                     mb: 2,
                     borderRadius: '40px',
                     backgroundColor: 'transparent',
-                    textTransform: 'lowercase',
                     border: '2px solid white',
                     color: 'white',
                   }}
