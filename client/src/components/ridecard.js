@@ -15,7 +15,7 @@ export default function RideCard({ ridename, date, startLocation, endLocation, t
 
   function formatDate(dateString) {
     const options = { month: 'long', day: 'numeric' };
-    const dateObj = new Date(dateString); // Directly use the dateString
+    const dateObj = new Date(dateString);
     return dateObj.toLocaleDateString('en-US', options);
   }
 
@@ -27,6 +27,16 @@ export default function RideCard({ ridename, date, startLocation, endLocation, t
     return `${hour12}:${minute} ${ampm}`;
   }
 
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const handleCardClick = () => {
+    setPopupOpen(true);
+  };
+
+  const handleClose = () => {
+    setPopupOpen(false);
+  };
+
   const items1 = [
     { name: ridename, spacing: '20px', fontSize: '30px' },
     { name: <><FaCalendarAlt /> {formatDate(date)}</>, spacing: '15px', fontSize: '15px' },
@@ -36,8 +46,21 @@ export default function RideCard({ ridename, date, startLocation, endLocation, t
 
   return (
     <Box sx={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
-      <Card variant="outlined" style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: '10px' }}>
-        <CardContent className="cardContent" style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontFamily: 'Poppins, sans-serif' }}>
+
+      <Card 
+        variant="outlined" 
+        sx={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.3)', 
+          borderRadius: '10px',
+          transition: 'transform 0.3s, opacity 0.3s',
+          '&:hover': {
+            transform: 'scale(1.03)',
+            opacity: 0.9
+          }
+        }}
+        onClick={handleCardClick}
+      >
+        <CardContent className="cardContent" sx={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontFamily: 'Poppins, sans-serif' }}>
           <div>
             {items1.map((item, index) => (
               <span key={index} style={{ marginRight: item.spacing, fontSize: item.fontSize, fontFamily: 'Poppins, sans-serif' }} >
@@ -64,6 +87,7 @@ export default function RideCard({ ridename, date, startLocation, endLocation, t
                   passengerList={passengerList}
                   additionalInfo={additionalInfo}
                 />
+
               </IconButton>
             </CardActions>
           </div>
