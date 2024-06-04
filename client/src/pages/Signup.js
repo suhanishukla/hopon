@@ -169,7 +169,7 @@ export default function SignUp({ setShowSignUp }) {
               required
               fullWidth
               id="email"
-              label="email address"
+              label="Email Address"
               autoComplete="email"
               name="username"
               value={formData.username}
@@ -204,7 +204,7 @@ export default function SignUp({ setShowSignUp }) {
               margin="normal"
               required
               fullWidth
-              label="password"
+              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -240,7 +240,7 @@ export default function SignUp({ setShowSignUp }) {
               margin="normal"
               required
               fullWidth
-              label="confirm password"
+              label="Confirm Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -308,7 +308,7 @@ export default function SignUp({ setShowSignUp }) {
 							Sign up with Google
 						</Button> */}
             <Link
-              href="#"
+              href="/LogIn"
               variant="body2"
               sx={{
                 display: "block",
@@ -317,7 +317,7 @@ export default function SignUp({ setShowSignUp }) {
                 marginTop: 2, // Optional: Add some margin to the top if needed
               }}
             >
-              {"Already have an account? Sign in"}
+              {"Already have an account? Sign In"}
             </Link>
           </Box>
         </Box>
