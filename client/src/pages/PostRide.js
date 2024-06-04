@@ -99,7 +99,7 @@ const PostRide = () => {
   const [end, setEnd] = useState(null);
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState('');
-  const [description, setDescription] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
   const [mapCenter, setMapCenter] = useState({ lat: 34.0689, lng: -118.4452 });
 
   const startRef = useRef(null);
@@ -143,7 +143,7 @@ const PostRide = () => {
       console.error("JWT token not found in session storage");
     }
 
-    const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance, description, uniqueID };
+    const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance, additionalInfo, uniqueID };
     const response = await fetch('http://localhost:4000/api/workouts/rider', {
       method: 'POST',
       body: JSON.stringify(rideDetails),
@@ -259,8 +259,8 @@ const PostRide = () => {
             />
             <TextField
               label="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={additionalInfo}
+              onChange={(e) => setAdditionalInfo(e.target.value)}
               fullWidth
               multiline
               rows={2}
