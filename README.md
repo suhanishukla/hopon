@@ -30,7 +30,7 @@ Client Side
 
 Server Side
 1. cd server
-2. npm install body-parser cors express mongoose nodemon
+2. npm install body-parser cors express mongoose nodemon axios
 3. npm start
 
 Open 2 terminals for client and server and run npm start in both. 
