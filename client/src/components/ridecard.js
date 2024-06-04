@@ -5,7 +5,7 @@ import RidePopup from './ridepopup';
 import { IoMdPerson } from "react-icons/io";
 import { RxDot } from "react-icons/rx";
 
-export default function RideCard({ ridename, date, startLocation, endLocation, time, totalPassengers, passengerList, additionalInfo }) {
+export default function RideCard({ ridename, date, startLocation, endLocation, time, totalPassengers, passengerList, description }) {
   const bull = (
     <Box
       component="span"
