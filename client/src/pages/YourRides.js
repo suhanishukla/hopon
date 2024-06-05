@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import RideCard from '../components/ridecard';
 import { Typography } from '@mui/material';
+import jwt from 'jsonwebtoken';
 
 export default function YourRides() {
   const [postedRides, setPostedRides] = useState([]);
   const [joinedRides, setJoinedRides] = useState([]);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     const fetchUserRides = async () => {
@@ -49,8 +51,15 @@ export default function YourRides() {
       }
     };
 
+    const fetchUserId = () => {
+      const token = sessionStorage.getItem('token');
+      const decodedToken = jwt.decode(token);
+      setUserId(decodedToken.id);
+    };
+
     fetchUserRides();
     fetchJoinedRides();
+    fetchUserId();
   }, []);
   
   const columnMain = {
