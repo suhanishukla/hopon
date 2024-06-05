@@ -19,8 +19,9 @@ function formatTime(timeString) {
   return `${hour12}:${minute} ${ampm}`;
 }
 
-export default function RidePopup({ isOpen, onClose, ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
+export default function RidePopup({ isOpen, onClose, rideId, ridename, startLocation, endLocation, date, time, currentPassengers, totalPassengers, passengerList, additionalInfo }) {
   const [popupHeight, setPopupHeight] = useState('auto');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const baseHeight = 380;
@@ -34,6 +35,41 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
     setPopupHeight(finalHeight);
   }, [passengerList, additionalInfo]);
   
+  
+
+  const handleJoinRide = async () => {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      alert('You must be logged in to join a ride');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:4000/api/workouts/joinRide', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, 
+        },
+        body: JSON.stringify({ rideId }),
+      });
+
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.indexOf('application/json') !== -1) {
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to join the ride');
+        }
+        alert('Successfully joined the ride!');
+        window.location.reload(); // Reload the page to update the ride info
+      } else {
+        throw new Error('Unexpected response format');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error.message);
+    }
+  };
   
 
   return (
@@ -104,41 +140,40 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
             <div style={{ width: '50%', marginLeft: '2%' }}>
               <div style={{ fontSize: '16px', marginBottom: '5px', fontWeight: 'bold', color: 'white' }}>Seats Available</div>
               <div style={{ backgroundColor: 'transparent', border: '2px solid white', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px', width: '100%', pointerEvents: 'none' }}>
-                {totalPassengers - passengerList.length}
+                {totalPassengers - currentPassengers}
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '20px' }}> {}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              {passengerList.map((passenger, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                  {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
-                  {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
-                  <span>{passenger.name}</span>
-                </div>
-              ))}
-            </div>
-            <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
-              <button
-                onClick={onClose}
-                style={{
-                  fontSize: '16px',
-                  padding: '10px 20px',
-                  backgroundColor: 'transparent',
-                  border: '2px solid white',
-                  borderRadius: '40px',
-                  color: 'white',
-                  fontFamily: '"Poppins", sans-serif',
-                  fontWeight: '600',
-                  transition: 'background-color 0.3s ease', 
-                  cursor: 'pointer', 
-                }}
-                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
-                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
-              >
-                Join Ride
-              </button>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+            {passengerList.map((passenger, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
+                {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
+                <span>{passenger.name}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
+          <button 
+  onClick={handleJoinRide} 
+  style={{
+    fontSize: '16px', 
+    padding: '10px 20px', 
+    backgroundColor: 'transparent', 
+    border: '2px solid white', 
+    borderRadius: '40px', 
+    color: 'white', 
+    fontFamily: '"Poppins", sans-serif', 
+    fontWeight: '600', 
+    transition: 'background-color 0.3s ease', // Adding transition for smooth color change
+    cursor: 'pointer', // Change cursor to pointer on hover
+  }}
+  // Adding hover effect
+  onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+  onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+>
+  Join Ride
+</button>
           </div>
         </div>
       )}
