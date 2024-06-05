@@ -226,6 +226,55 @@ const getJoinedRides = async (req, res) => {
   }
 };
 
+const deleteRide = async (req, res) => {
+  const rideId = req.params.rideId;
 
+  try {
+    console.log(rideId)
+    const token = req.header('Authorization').replace('Bearer ', '');
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const user = await users.findById(decoded.id);
+    const ride1 = await ride.findById(rideId);
 
-export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider, getUserRides, joinRide, getJoinedRides};
+    if (!ride1) {
+      return res.status(404).json({ message: 'Ride not found' });
+    }
+
+    if (ride1.uniqueID.toString() !== user._id.toString()) {
+      return res.status(403).json({ message: 'You are not authorized to delete this ride' });
+    }
+
+    await ride.findByIdAndDelete(rideId);
+
+    res.status(200).json({ message: 'Ride successfully deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+const leaveRide = async (req, res) => {
+  const rideId = req.params.rideId;
+
+  try {
+    const token = req.header('Authorization').replace('Bearer ', '');
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const user = await users.findById(decoded.id);
+    const ride1 = await ride.findById(rideId);
+
+    if (!ride1) {
+      return res.status(404).json({ message: 'Ride not found' });
+    }
+
+    if (!ride1.passengerList.includes(user._id)) {
+      return res.status(400).json({ message: 'You are not part of this ride' });
+    }
+    ride1.passengerList = ride1.passengerList.filter(passengerList => passengerList.toString() !== user._id.toString());
+    ride1.currentPassengers = ride1.currentPassengers - 1;
+    await ride1.save();
+    res.status(200).json({ message: 'Successfully left the ride' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider, getUserRides, joinRide, getJoinedRides, deleteRide, leaveRide};
