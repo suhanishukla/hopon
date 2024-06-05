@@ -41,7 +41,7 @@ Server Side
 Open 2 terminals for client and server and run npm start in both.
 
 ## Features
-- **User Authentication:** ....
+- **User Authentication:** Users will provide their email address to make an account. To verify that the users are college students, we will require that the user provides a university issued email address ending with .edu. A verification email will be sent to the provided email address to confirm the email address in order to finish account creation.  
 - **Post a Ride:**
 - **Find a Ride:**
 - **Join a Ride:**
