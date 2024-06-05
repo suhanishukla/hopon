@@ -4,6 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 function formatDate(dateString) {
   const options = { month: 'long', day: 'numeric' };
@@ -121,8 +122,11 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
             <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
             <button
                 style={{
-                  fontSize: '16px',
-                  padding: '10px 20px',
+                  display: 'inline-block',
+      verticalAlign: 'middle',
+                  fontSize: '20px',
+                  padding: '5px 10px',
+                  paddingTop: '10px',
                   backgroundColor: 'transparent',
                   border: '2px solid white',
                   borderRadius: '40px',
@@ -130,17 +134,19 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
                   fontFamily: '"Poppins", sans-serif',
                   fontWeight: '600',
                   transition: 'background-color 0.3s ease', 
-                  cursor: 'pointer', 
-                  marginLeft: '10px'
+                  cursor: 'pointer',
+                  marginRight: '4%',
                 }}
                 onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
                 onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
               >
-                Email
+                <MdOutlineMailOutline />
               </button>
               <button
                 onClick={onClose}
                 style={{
+                  display: 'inline-block',
+      verticalAlign: 'middle',
                   fontSize: '16px',
                   padding: '10px 20px',
                   backgroundColor: 'transparent',
