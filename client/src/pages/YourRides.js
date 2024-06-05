@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import RideCard from '../components/RideCard';
+import RideCard from '../components/ridecard';
+import { Typography } from '@mui/material';
 import jwt from 'jsonwebtoken';
 
 export default function YourRides() {
@@ -60,146 +61,72 @@ export default function YourRides() {
     fetchJoinedRides();
     fetchUserId();
   }, []);
+  
+  const columnMain = {
+    width: '45%',
+  };
+
+  const columnStyle = {
+    width: '100%',
+    maxHeight: '670px',
+    overflowY: 'auto',
+    // marginTop: '20px',
+  };
+
+  const stickyTextStyle = {
+    position: 'sticky',
+    top: '0',
+    zIndex: '1',
+    fontWeight: 'bold',
+    padding: '10px 20px',
+  };
 
   return (
-    <div className="background">
-      <h2>Posted Rides</h2>
-      {postedRides.map((ride, index) => (
-        <RideCard 
-          key={index}
-          rideId={ride._id}
-          ridename={ride.rideName}
-          startLocation={ride.start}
-          endLocation={ride.end}
-          date={ride.createdAt}
-          time={ride.rideTime}
-          currentPassengers={ride.currentPassengers}
-          totalPassengers={ride.passengers}
-          passengerList={[]}
-          additionalInfo="your mom"
-          isCreator={true}
-          isJoined={false}
-        />
-      ))}
-      {console.log(postedRides)}
+    <div className='background'> 
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+      <div style={columnMain}>
+      <Typography style={stickyTextStyle} component="h1" variant="h4"> Posted Rides </Typography>
+        <div style={columnStyle}>
+          
+          {postedRides.map((ride, index) => (
+            <RideCard 
+              key={index}
+              rideId={ride._id}
+              ridename={ride.rideName}
+              startLocation={ride.start}
+              endLocation={ride.end}
+              date={ride.rideDate}
+              time={ride.rideTime}
+              currentPassengers={ride.currentPassengers}
+              totalPassengers={ride.passengers}
+              passengerList={[]}
+              additionalInfo="your mom"
+            />
+          ))}
+        </div>
+      </div>
 
-      <h2>Joined Rides</h2>
-      {joinedRides.map((ride, index) => (
-        <RideCard 
-          key={index}
-          rideId={ride._id}
-          ridename={ride.rideName}
-          startLocation={ride.start}
-          endLocation={ride.end}
-          date={ride.createdAt}
-          time={ride.rideTime}
-          currentPassengers={ride.currentPassengers}
-          totalPassengers={ride.passengers}
-          passengerList={[]}
-          additionalInfo="your mom"
-          isCreator={false}
-          isJoined={true}
-        />
-      ))}
-      {console.log(joinedRides)}
+        <div style={columnMain}>
+          <Typography style={stickyTextStyle} component="h1" variant="h4"> Joined Rides </Typography>
+          <div style={columnStyle}> 
+          {joinedRides.map((ride, index) => (
+            <RideCard 
+              key={index}
+              rideId={ride._id}
+              ridename={ride.rideName}
+              startLocation={ride.start}
+              endLocation={ride.end}
+              date={ride.rideDate}
+              time={ride.rideTime}
+              currentPassengers={ride.currentPassengers}
+              totalPassengers={ride.passengers}
+              passengerList={[]}
+              additionalInfo="your mom"
+            />
+          ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-
-// import React, { useEffect, useState } from 'react';
-// import RideCard from '../components/ridecard';
-
-// export default function YourRides() {
-//   const [postedRides, setPostedRides] = useState([]);
-//   const [joinedRides, setJoinedRides] = useState([]);
-
-//   useEffect(() => {
-//     const fetchUserRides = async () => {
-//       const token = sessionStorage.getItem('token');
-
-//       try {
-//         const response = await fetch("http://localhost:4000/api/workouts/userRides", {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         });
-
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch user rides");
-//         }
-
-//         const json = await response.json();
-//         setPostedRides(json);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
-
-//     const fetchJoinedRides = async () => {
-//       const token = sessionStorage.getItem('token');
-
-//       try {
-//         const response = await fetch("http://localhost:4000/api/workouts/joinedRides", {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         });
-
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch joined rides");
-//         }
-
-//         const json = await response.json();
-//         setJoinedRides(json);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
-
-//     fetchUserRides();
-//     fetchJoinedRides();
-//   }, []);
-
-//   return (
-//     <div className="background">
-//       <h2>Posted Rides</h2>
-//       {postedRides.map((ride, index) => (
-//         <RideCard 
-//           key={index}
-//           rideId={ride._id}
-//           ridename={ride.rideName}
-//           startLocation={ride.start}
-//           endLocation={ride.end}
-//           date={ride.rideDate}
-//           time={ride.rideTime}
-//           currentPassengers={ride.currentPassengers}
-//           totalPassengers={ride.passengers}
-//           passengerList={[]}
-//           additionalInfo="your mom"
-//         />
-//       ))}
-//       {console.log(postedRides)}
-
-//       <h2>Joined Rides</h2>
-//       {joinedRides.map((ride, index) => (
-//         <RideCard 
-//           key={index}
-//           rideId={ride._id}
-//           ridename={ride.rideName}
-//           startLocation={ride.start}
-//           endLocation={ride.end}
-//           date={ride.rideDate}
-//           time={ride.rideTime}
-//           currentPassengers={ride.currentPassengers}
-//           totalPassengers={ride.passengers}
-//           passengerList={[]}
-//           additionalInfo="your mom"
-//         />
-//       ))}
-//       {console.log(joinedRides)}
-//     </div>
-//   );
-// }
-
-
