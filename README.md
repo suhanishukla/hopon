@@ -23,7 +23,7 @@ Using nvm to run the right version https://github.com/nvm-sh/nvm
 3. run $ nvm install 16.20.2
 4. $ nvm use 16.20.2 
 
-**Setting up Dependencies + Running the App
+**Setting up Dependencies + Running the App**
 Client Side
 1. cd client
 2. npm install
