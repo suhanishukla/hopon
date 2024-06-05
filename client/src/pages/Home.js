@@ -48,7 +48,7 @@ const Home = () => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div className='start-container'>
-            <Link to="/LogIn" className='start'>Get Started</Link>
+            <Link to="/Find%20a%20Ride" className='start'>Get Started</Link>
             <div class="gif-container">
               <img src={carGif}></img>
             </div>
