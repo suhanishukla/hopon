@@ -119,6 +119,25 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
               ))}
             </div>
             <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
+            <button
+                style={{
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                  marginLeft: '10px'
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+              >
+                Email
+              </button>
               <button
                 onClick={onClose}
                 style={{
