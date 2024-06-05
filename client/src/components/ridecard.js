@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import { FaClock, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import RidePopup from './ridepopup';
@@ -27,6 +27,16 @@ export default function RideCard({ rideId, ridename, startLocation, endLocation,
     return `${hour12}:${minute} ${ampm}`;
   }
 
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const handleCardClick = () => {
+    setPopupOpen(true);
+  };
+
+  const handleClose = () => {
+    setPopupOpen(false);
+  };
+
   const items1 = [
     { name: ridename, spacing: '20px', fontSize: '30px' },
     { name: <><FaCalendarAlt /> {formatDate(date)}</>, spacing: '15px', fontSize: '15px' },
@@ -36,8 +46,20 @@ export default function RideCard({ rideId, ridename, startLocation, endLocation,
 
   return (
     <Box sx={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
-      <Card variant="outlined" style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: '10px' }}>
-        <CardContent className="cardContent" style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontFamily: 'Poppins, sans-serif' }}>
+      <Card 
+        variant="outlined" 
+        sx={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.3)', 
+          borderRadius: '10px',
+          transition: 'transform 0.3s, opacity 0.3s',
+          '&:hover': {
+            transform: 'scale(1.03)',
+            opacity: 0.9
+          }
+        }}
+        onClick={handleCardClick}
+      >
+        <CardContent className="cardContent" sx={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontFamily: 'Poppins, sans-serif' }}>
           <div>
             {items1.map((item, index) => (
               <span key={index} style={{ marginRight: item.spacing, fontSize: item.fontSize, fontFamily: 'Poppins, sans-serif' }} >
@@ -54,18 +76,22 @@ export default function RideCard({ rideId, ridename, startLocation, endLocation,
           <div>
             <CardActions sx={{ justifyContent: 'flex-end', mt: 4 }}>
               <IconButton>
-                <RidePopup
-                  rideId={rideId}
-                  ridename={ridename}
-                  startLocation={startLocation}
-                  endLocation={endLocation}
-                  date={date}
-                  time={time}
-                  currentPassengers={currentPassengers}
-                  totalPassengers={totalPassengers}
-                  passengerList={passengerList}
-                  additionalInfo={additionalInfo}
-                />
+                {popupOpen && (
+                  <RidePopup
+                    isOpen={popupOpen}
+                    onClose={handleClose}
+                    rideId={rideId}
+                    ridename={ridename}
+                    startLocation={startLocation}
+                    endLocation={endLocation}
+                    date={date}
+                    time={time}
+                    currentPassengers={currentPassengers}
+                    totalPassengers={totalPassengers}
+                    passengerList={passengerList}
+                    additionalInfo={additionalInfo}
+                  />
+                )}
               </IconButton>
             </CardActions>
           </div>
