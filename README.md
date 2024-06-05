@@ -5,8 +5,8 @@ HopOn is a full stack web application built using the MERN stack designed for co
 
 ## Overview of Topics
 - [Setup](#cloning-the-repo-locally)
-- [Features](#when-do-we-need-databases)
-- [Technology](#types-of-databases)
+- [Features](#features)
+- [Technology](#technology)
 - [Demo](#demo)
 
 ## Cloning the Repo Locally
@@ -26,6 +26,7 @@ Using nvm to run the right version https://github.com/nvm-sh/nvm
 4. $ nvm use 16.20.2 
 
 **Setting up Dependencies + Running the App**
+
 Client Side
 1. cd client
 2. npm install
