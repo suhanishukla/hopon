@@ -62,7 +62,7 @@ export default function YourRides() {
           ridename={ride.rideName}
           startLocation={ride.start}
           endLocation={ride.end}
-          date={ride.createdAt}
+          date={ride.rideDate}
           time={ride.rideTime}
           currentPassengers={ride.currentPassengers}
           totalPassengers={ride.passengers}
@@ -80,7 +80,7 @@ export default function YourRides() {
           ridename={ride.rideName}
           startLocation={ride.start}
           endLocation={ride.end}
-          date={ride.createdAt}
+          date={ride.rideDate}
           time={ride.rideTime}
           currentPassengers={ride.currentPassengers}
           totalPassengers={ride.passengers}

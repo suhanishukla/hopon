@@ -182,7 +182,8 @@ export default function FindRide() {
   return (
     <div className="background">
       <Paper className={classes.container}>
-        <Typography component="h1" variant="h4">Find a Ride</Typography>
+      <div className={classes.searchContainer}>
+        <Typography component="h1" variant="h4" className={classes.text}>Find a Ride</Typography>
         <form className={classes.form} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
           <TextField
             inputRef={startRef}
@@ -214,21 +215,24 @@ export default function FindRide() {
             Search
           </Button>
         </form>
-        {filteredRides.map((ride, index) => (
-          <RideCard 
-            key={index}
-            rideId={ride._id}
-            ridename={ride.rideName}
-            startLocation={ride.start}
-            endLocation={ride.end}
-            date={ride.date}
-            time={ride.rideTime}
-            currentPassengers={ride.currentPassengers}
-            totalPassengers={ride.passengers}
-            passengerList={[]}
-            additionalInfo={ride.additionalInfo}
-          />
-        ))}
+        </div>
+        <div className={classes.resultsContainer}>
+          {filteredRides.map((ride, index) => (
+            <RideCard 
+              key={index}
+              rideId={ride._id}
+              ridename={ride.rideName}
+              startLocation={ride.start}
+              endLocation={ride.end}
+              date={ride.rideDate}
+              time={ride.rideTime}
+              currentPassengers={ride.currentPassengers}
+              totalPassengers={ride.passengers}
+              passengerList={[]}
+              additionalInfo={ride.additionalInfo}
+            />
+          ))}
+        </div>
       </Paper>
     </div>
   );

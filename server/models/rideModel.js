@@ -6,12 +6,10 @@ const rideSchema = new Schema({
     type: String,
     required: true
   },
-  
   rideDate: {
         type: String,
         required: true
     },
-  
   rideTime: {
     type: String,
     required: true
@@ -37,6 +35,10 @@ const rideSchema = new Schema({
     required: true
   },
   distance: {
+    type: String,
+    required: true
+  },
+  additionalInfo: {
     type: String,
     required: true
   },
