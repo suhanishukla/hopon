@@ -20,6 +20,60 @@ const generateToken = (user) => {
     );
   };
 
+  const joinRide = async (req, res) => {
+    const { rideId } = req.body;
+    const authHeader = req.headers.authorization;
+  
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Authorization header missing' });
+    }
+  
+    const token = authHeader.split(' ')[1];
+  
+    try {
+      const decoded = jwt.verify(token, SECRET_KEY);
+      const userId = decoded.id;
+  
+      const user = await users.findById(userId);
+      if (!user) {
+        return res.status(400).json({ error: 'User not found' });
+      }
+  
+      const ride1 = await ride.findById(rideId);
+      if (!ride1) {
+        return res.status(400).json({ error: 'Ride not found' });
+      }
+  
+      // Check if the user is trying to join their own ride
+      if (ride1.uniqueID.toString() === userId) {
+        return res.status(400).json({ error: 'Cannot join your own ride' });
+      }
+  
+      // Check if the user is already in the passenger list
+      const userInList = ride1.passengerList.some(passenger => passenger.toString() === userId);
+      if (userInList) {
+        return res.status(400).json({ error: 'User already joined the ride' });
+      }
+  
+      // Check if there's room for more passengers
+      if (ride1.currentPassengers >= ride1.passengers) {
+        return res.status(400).json({ error: 'No available seats' });
+      }
+  
+      // Add user to the passenger list
+      ride1.passengerList.push(userId);
+      ride1.currentPassengers += 1;
+      await ride1.save();
+  
+      res.status(200).json({ message: 'Successfully joined the ride' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to join the ride' });
+    }
+  };
+  
+  
+
 //get all workouts
 const all_users = async(req, res) => {
     const everyone = await ride.find({}).sort({createdAt: -1}) //sort by descending order
@@ -72,6 +126,7 @@ const loginUser = async (req, res) => {
 // In your workoutController.js
 
 
+
 //create a new workout
 const new_users = async(req, res) =>{
     const {username, password, first_name} = req.body
@@ -113,7 +168,7 @@ const deleteUser = async(req, res) =>
         res.status(404).json({error: "No such user found"})
     }
 
-    const delete_user = await users.findOneAndDelete({_id: id})
+    const delete_user = await ride.findOneAndDelete({_id: id})
 
     if (!delete_user){
         return res.status(400).json({error: "No such user"}) //return to prevent it from running rest of the code
@@ -149,6 +204,28 @@ const renderLogIn = async(req, res) => {
     res.render('Login');
 }
 
+const getJoinedRides = async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const userId = decoded.id;
+    const joinedRides = await ride.find({ passengerList: userId }).sort({ createdAt: -1 });
+
+    if (!joinedRides) {
+      return res.status(404).json({ message: 'No joined rides found for this user' });
+    }
+
+    res.status(200).json(joinedRides);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch joined rides', error });
+  }
+};
 
 
-export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider, getUserRides};
+
+export {new_users, all_users, loginUser, deleteUser, updateUser, renderLogIn, rider, getUserRides, joinRide, getJoinedRides};

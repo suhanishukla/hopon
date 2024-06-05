@@ -90,8 +90,9 @@ export default function FindRide() {
           throw new Error("Failed to fetch rides");
         }
         const json = await response.json();
-        setRides(json);
-        setFilteredRides(json);
+        const availableRides = json.filter(ride => ride.currentPassengers < ride.passengers);
+        setRides(availableRides);
+        setFilteredRides(availableRides);
       } catch (error) {
         console.error(error);
       }
@@ -120,7 +121,7 @@ export default function FindRide() {
     for (const ride of rides) {
       const startWithinFiveMiles = await isWithinFiveMiles(ride.start, startLocation);
       const endWithinFiveMiles = await isWithinFiveMiles(ride.end, endLocation);
-      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime)) {
+      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime) && (ride.currentPassengers < ride.passengers)) {
         filtered.push(ride);
       }
     }
@@ -194,11 +195,13 @@ export default function FindRide() {
         {filteredRides.map((ride, index) => (
           <RideCard 
             key={index}
+            rideId={ride._id}
             ridename={ride.rideName}
             startLocation={ride.start}
             endLocation={ride.end}
             date={ride.date}
             time={ride.rideTime}
+            currentPassengers={ride.currentPassengers}
             totalPassengers={ride.passengers}
             passengerList={[]}
             additionalInfo={ride.additionalInfo}

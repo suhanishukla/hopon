@@ -20,8 +20,9 @@ function formatTime(timeString) {
   return `${hour12}:${minute} ${ampm}`;
 }
 
-export default function RidePopup({ ridename, startLocation, endLocation, date, time, totalPassengers, passengerList, additionalInfo }) {
+export default function RidePopup({ rideId, ridename, startLocation, endLocation, date, time, currentPassengers, totalPassengers, passengerList, additionalInfo }) {
   const [popupHeight, setPopupHeight] = useState('auto');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const baseHeight = 280;
@@ -30,6 +31,41 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
 
     setPopupHeight(calculatedHeight);
   }, [passengerList]);
+
+  const handleJoinRide = async () => {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      alert('You must be logged in to join a ride');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:4000/api/workouts/joinRide', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, 
+        },
+        body: JSON.stringify({ rideId }),
+      });
+
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.indexOf('application/json') !== -1) {
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to join the ride');
+        }
+        alert('Successfully joined the ride!');
+        window.location.reload(); // Reload the page to update the ride info
+      } else {
+        throw new Error('Unexpected response format');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error.message);
+    }
+  };
+  
 
   return (
     <Popup
@@ -94,7 +130,7 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
             <div style={{ width: '50%', marginLeft: '2%' }}>
               <div style={{ fontSize: '16px', marginBottom: '5px', fontWeight: 'bold', color: 'white' }}>Seats Available</div>
               <div style={{ backgroundColor: 'transparent', border: '2px solid white', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px', width: '100%', pointerEvents: 'none' }}>
-                {totalPassengers - passengerList.length}
+                {totalPassengers - currentPassengers}
               </div>
             </div>
           </div>
@@ -109,7 +145,7 @@ export default function RidePopup({ ridename, startLocation, endLocation, date, 
           </div>
           <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
           <button 
-  onClick={close} 
+  onClick={handleJoinRide} 
   style={{
     fontSize: '16px', 
     padding: '10px 20px', 
