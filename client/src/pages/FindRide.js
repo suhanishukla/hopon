@@ -95,6 +95,7 @@ export default function FindRide() {
   const [startLocation, setStartLocation] = useState('');
   const [endLocation, setEndLocation] = useState('');
   const [rideTime, setRideTime] = useState('');
+  const [rideDate, setRideDate] = useState('');
 
   const startRef = useRef(null);
   const endRef = useRef(null);
@@ -143,7 +144,10 @@ export default function FindRide() {
     for (const ride of rides) {
       const startWithinFiveMiles = await isWithinFiveMiles(ride.start, startLocation);
       const endWithinFiveMiles = await isWithinFiveMiles(ride.end, endLocation);
-      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime) && (ride.currentPassengers < ride.passengers)) {
+      const diff = isWithinRideDate(ride.rideDate, rideDate);
+      // console.log(diff)
+      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime) && (ride.currentPassengers < ride.passengers) && diff <= 3) {
+        console.log(diff)
         filtered.push(ride);
       }
     }
@@ -179,6 +183,23 @@ export default function FindRide() {
     return timeDifference <= 30 * 60 * 1000; // 30 minutes in milliseconds
   };
 
+  const isWithinRideDate = (rideDate, selectedDate) => {
+    console.log("From Mongo:", rideDate);
+    console.log("From Form: ",selectedDate);
+    // return rideDate === selectedDate;
+    const rideDateTime = new Date(`${rideDate}T00:00:00Z`);
+    const selectedDateTime = new Date(`${selectedDate}T00:00:00Z`);
+    console.log("From Mongo 2: ", rideDateTime);
+    console.log("From Form 2: ",selectedDateTime);
+    const differenceInMilliseconds = Math.abs(rideDateTime - selectedDateTime);
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const differenceInDays = differenceInMilliseconds / millisecondsPerDay;
+    console.log(differenceInDays); // Output: 1987
+    return differenceInDays;
+    const timeDifference = Math.abs(rideDateTime - selectedDateTime);
+    return timeDifference <= 30 * 60 * 1000; // 30 minutes in milliseconds
+  };
+
   return (
     <div className="background">
       <Paper className={classes.container}>
@@ -198,6 +219,19 @@ export default function FindRide() {
             variant="outlined"
             className={classes.textField}
             fullWidth
+          />
+      
+          <TextField
+            type="date"
+            label="Date"
+            value={rideDate}
+            onChange={(e) => setRideDate(e.target.value)}
+            variant="outlined"
+            className={classes.textField}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             type="time"
