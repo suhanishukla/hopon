@@ -35,7 +35,10 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
     setPopupHeight(finalHeight);
   }, [passengerList, additionalInfo]);
   
-  
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Joining your Ride on HopOn!');
+    window.open(`mailto:suhanishukla@g.ucla.edu?subject=${subject}`);
+  };   
 
   return (
     <Popup
@@ -139,6 +142,7 @@ export default function RidePopup({ isOpen, onClose, ridename, startLocation, en
                 }}
                 onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
                 onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+                onClick={handleEmailClick}
               >
                 <MdOutlineMailOutline />
               </button>
