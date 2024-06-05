@@ -4,6 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 function formatDate(dateString) {
   const options = { month: 'long', day: 'numeric' };
@@ -31,6 +32,11 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
     const finalHeight = Math.max(calculatedHeight, baseHeight);
     setPopupHeight(finalHeight);
   }, [passengerList, additionalInfo]);
+  
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Joining your Ride on HopOn!');
+    window.open(`mailto:suhanishukla@g.ucla.edu?subject=${subject}`);
+  };   
 
   const handleJoinRide = async () => {
     const token = sessionStorage.getItem('token');
@@ -240,6 +246,7 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
             >
               Close
             </button>
+
           </div>
         </div>
       )}
