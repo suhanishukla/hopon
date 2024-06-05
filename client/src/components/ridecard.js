@@ -90,6 +90,7 @@ export default function RideCard({ rideId, ridename, startLocation, endLocation,
                     totalPassengers={totalPassengers}
                     passengerList={passengerList}
                     additionalInfo={additionalInfo}
+                    
                   />
                 )}
               </IconButton>

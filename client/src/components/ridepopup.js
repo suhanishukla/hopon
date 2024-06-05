@@ -4,6 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 function formatDate(dateString) {
   const options = { month: 'long', day: 'numeric' };
@@ -35,7 +36,10 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
     setPopupHeight(finalHeight);
   }, [passengerList, additionalInfo]);
   
-  
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Joining your Ride on HopOn!');
+    window.open(`mailto:suhanishukla@g.ucla.edu?subject=${subject}`);
+  };   
 
   const handleJoinRide = async () => {
     const token = sessionStorage.getItem('token');
@@ -144,36 +148,62 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-            {passengerList.map((passenger, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
-                {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
-                <span>{passenger.name}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
-          <button 
-  onClick={handleJoinRide} 
-  style={{
-    fontSize: '16px', 
-    padding: '10px 20px', 
-    backgroundColor: 'transparent', 
-    border: '2px solid white', 
-    borderRadius: '40px', 
-    color: 'white', 
-    fontFamily: '"Poppins", sans-serif', 
-    fontWeight: '600', 
-    transition: 'background-color 0.3s ease', // Adding transition for smooth color change
-    cursor: 'pointer', // Change cursor to pointer on hover
-  }}
-  // Adding hover effect
-  onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
-  onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
->
-  Join Ride
-</button>
+          <div style={{ marginTop: '20px' }}> {}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              {passengerList.map((passenger, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                  {passenger.isCrown && <FaCrown style={{ fontSize: '24px', marginRight: '10px' }} />}
+                  {!passenger.isCrown && <IoPerson style={{ fontSize: '24px', marginRight: '10px' }} />}
+                  <span>{passenger.name}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
+            <button
+                style={{
+                  display: 'inline-block',
+      verticalAlign: 'middle',
+                  fontSize: '20px',
+                  padding: '5px 10px',
+                  paddingTop: '10px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer',
+                  marginRight: '4%',
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+                onClick={handleEmailClick}
+              >
+                <MdOutlineMailOutline />
+              </button>
+              <button
+                onClick={onClose}
+                style={{
+                  display: 'inline-block',
+      verticalAlign: 'middle',
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+              >
+                Join Ride
+              </button>
+            </div>
           </div>
         </div>
       )}
