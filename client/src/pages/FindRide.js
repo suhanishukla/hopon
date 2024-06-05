@@ -112,8 +112,9 @@ export default function FindRide() {
           throw new Error("Failed to fetch rides");
         }
         const json = await response.json();
-        setRides(json);
-        setFilteredRides(json);
+        const availableRides = json.filter(ride => ride.currentPassengers < ride.passengers);
+        setRides(availableRides);
+        setFilteredRides(availableRides);
       } catch (error) {
         console.error(error);
       }
@@ -142,7 +143,7 @@ export default function FindRide() {
     for (const ride of rides) {
       const startWithinFiveMiles = await isWithinFiveMiles(ride.start, startLocation);
       const endWithinFiveMiles = await isWithinFiveMiles(ride.end, endLocation);
-      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime)) {
+      if (startWithinFiveMiles && endWithinFiveMiles && isWithinTimeRange(ride.rideTime, rideTime) && (ride.currentPassengers < ride.passengers)) {
         filtered.push(ride);
       }
     }
@@ -181,55 +182,53 @@ export default function FindRide() {
   return (
     <div className="background">
       <Paper className={classes.container}>
-        <div className={classes.searchContainer}>
-        <Typography component="h1" variant="h4" className={classes.text}>Find a Ride.</Typography>
-          <form className={classes.form} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
-            <TextField
-              inputRef={startRef}
-              label="Starting Location"
-              variant="outlined"
-              className={classes.textField}
-              fullWidth
-            />
-            <TextField
-              inputRef={endRef}
-              label="Ending Location"
-              variant="outlined"
-              className={classes.textField}
-              fullWidth
-            />
-            <TextField
-              type="time"
-              label="Time"
-              value={rideTime}
-              onChange={(e) => setRideTime(e.target.value)}
-              variant="outlined"
-              className={classes.textField}
-              fullWidth
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <Button type="submit" variant="contained" className={classes.searchButton}>
-              Search
-            </Button>
-          </form>
-        </div>
-        <div className={classes.resultsContainer}>
-          {filteredRides.map((ride, index) => (
-            <RideCard 
-              key={index}
-              ridename={ride.rideName}
-              date={ride.rideDate}
-              startLocation={ride.start}
-              endLocation={ride.end}
-              time={ride.rideTime}
-              totalPassengers={ride.passengers}
-              passengerList={[]}
-              additionalInfo={ride.additionalInfo}
-            />
-          ))}
-        </div>
+        <Typography component="h1" variant="h4">Find a Ride</Typography>
+        <form className={classes.form} onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
+          <TextField
+            inputRef={startRef}
+            label="Starting Location"
+            variant="outlined"
+            className={classes.textField}
+            fullWidth
+          />
+          <TextField
+            inputRef={endRef}
+            label="Ending Location"
+            variant="outlined"
+            className={classes.textField}
+            fullWidth
+          />
+          <TextField
+            type="time"
+            label="Time"
+            value={rideTime}
+            onChange={(e) => setRideTime(e.target.value)}
+            variant="outlined"
+            className={classes.textField}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <Button type="submit" variant="contained" className={classes.searchButton}>
+            Search
+          </Button>
+        </form>
+        {filteredRides.map((ride, index) => (
+          <RideCard 
+            key={index}
+            rideId={ride._id}
+            ridename={ride.rideName}
+            startLocation={ride.start}
+            endLocation={ride.end}
+            date={ride.date}
+            time={ride.rideTime}
+            currentPassengers={ride.currentPassengers}
+            totalPassengers={ride.passengers}
+            passengerList={[]}
+            additionalInfo={ride.additionalInfo}
+          />
+        ))}
       </Paper>
     </div>
   );
