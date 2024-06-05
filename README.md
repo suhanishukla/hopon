@@ -1,9 +1,9 @@
-# HopOn
-**Contributors:** Sneha Agarwal, Riya Gupta, Sanjana Rathore, Aaryan Rustagi, Rushil Shah, Suhani Shukla
+## HopOn
+**Authors:** Sneha Agarwal, Riya Gupta, Sanjana Rathore, Aaryan Rustagi, Rushil Shah, Suhani Shukla
 
 HopOn is a full stack web application built using the MERN stack designed for college students. HopOn allows students to post their ride details including starting location, destination, time, and available seats. Other students can then join the ride through the app if they need transportation to the same destination or somewhere along the way.
 
-## Overview of Topics
+## Table of Contents
 - [Setup](#cloning-the-repo-locally)
 - [Features](#features)
 - [Technology](#technology)
@@ -38,6 +38,24 @@ Server Side
 2. npm install body-parser cors express mongoose nodemon axios
 3. npm start
 
-Open 2 terminals for client and server and run npm start in both. 
+Open 2 terminals for client and server and run npm start in both.
+
+## Features
+- **User Authentication:** ....
+- **Post a Ride:**
+- **Find a Ride:**
+- **Join a Ride:**
+- **Google Maps API:**
+- **Contact Ride Poster:**
+
+## Technology
+-  **Frontend:** React.js, Javascript, Node.js
+-  **Backend:** MongoDB, Express.js
+
+## Demo
+Here is the video link to our demo!
+
+
+  
 
 
