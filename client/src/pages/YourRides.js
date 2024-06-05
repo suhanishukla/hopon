@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RideCard from '../components/ridecard';
+import { Typography } from '@mui/material';
 
 export default function YourRides() {
   const [postedRides, setPostedRides] = useState([]);
@@ -51,46 +52,72 @@ export default function YourRides() {
     fetchUserRides();
     fetchJoinedRides();
   }, []);
+  
+  const columnMain = {
+    width: '45%',
+  };
+
+  const columnStyle = {
+    width: '100%',
+    maxHeight: '670px',
+    overflowY: 'auto',
+    // marginTop: '20px',
+  };
+
+  const stickyTextStyle = {
+    position: 'sticky',
+    top: '0',
+    zIndex: '1',
+    fontWeight: 'bold',
+    padding: '10px 20px',
+  };
 
   return (
-    <div className="background">
-      <h2>Posted Rides</h2>
-      {postedRides.map((ride, index) => (
-        <RideCard 
-          key={index}
-          rideId={ride._id}
-          ridename={ride.rideName}
-          startLocation={ride.start}
-          endLocation={ride.end}
-          date={ride.rideDate}
-          time={ride.rideTime}
-          currentPassengers={ride.currentPassengers}
-          totalPassengers={ride.passengers}
-          passengerList={[]}
-          additionalInfo="your mom"
-        />
-      ))}
-      {console.log(postedRides)}
+    <div className='background'> 
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+      <div style={columnMain}>
+      <Typography style={stickyTextStyle} component="h1" variant="h4"> Posted Rides </Typography>
+        <div style={columnStyle}>
+          
+          {postedRides.map((ride, index) => (
+            <RideCard 
+              key={index}
+              rideId={ride._id}
+              ridename={ride.rideName}
+              startLocation={ride.start}
+              endLocation={ride.end}
+              date={ride.rideDate}
+              time={ride.rideTime}
+              currentPassengers={ride.currentPassengers}
+              totalPassengers={ride.passengers}
+              passengerList={[]}
+              additionalInfo="your mom"
+            />
+          ))}
+        </div>
+      </div>
 
-      <h2>Joined Rides</h2>
-      {joinedRides.map((ride, index) => (
-        <RideCard 
-          key={index}
-          rideId={ride._id}
-          ridename={ride.rideName}
-          startLocation={ride.start}
-          endLocation={ride.end}
-          date={ride.rideDate}
-          time={ride.rideTime}
-          currentPassengers={ride.currentPassengers}
-          totalPassengers={ride.passengers}
-          passengerList={[]}
-          additionalInfo="your mom"
-        />
-      ))}
-      {console.log(joinedRides)}
+        <div style={columnMain}>
+          <Typography style={stickyTextStyle} component="h1" variant="h4"> Joined Rides </Typography>
+          <div style={columnStyle}> 
+          {joinedRides.map((ride, index) => (
+            <RideCard 
+              key={index}
+              rideId={ride._id}
+              ridename={ride.rideName}
+              startLocation={ride.start}
+              endLocation={ride.end}
+              date={ride.rideDate}
+              time={ride.rideTime}
+              currentPassengers={ride.currentPassengers}
+              totalPassengers={ride.passengers}
+              passengerList={[]}
+              additionalInfo="your mom"
+            />
+          ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-
