@@ -31,6 +31,12 @@ router.post('/joinRide', functions.joinRide);
 
 router.get('/joinedRides', functions.getJoinedRides);
 
+// Delete a ride
+router.delete('/deleteRide/:rideId', functions.deleteRide);
+
+// Leave a ride
+router.post('/leaveRide/:rideId', functions.leaveRide);
+
 
 
 
