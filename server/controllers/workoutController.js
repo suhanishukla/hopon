@@ -80,6 +80,7 @@ const all_users = async(req, res) => {
     res.status(200).json(everyone) //gives us user documents in an array
 }
 
+//const idToEmail = async()
 const getUserRides = async (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   
