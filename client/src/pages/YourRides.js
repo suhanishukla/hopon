@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import RideCard from '../components/RideCard';
+import RideCard from '../components/ridecard';
 
 export default function YourRides() {
   const [postedRides, setPostedRides] = useState([]);

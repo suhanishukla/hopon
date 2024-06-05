@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { IoIosArrowForward } from "react-icons/io";
 import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
@@ -20,17 +19,23 @@ function formatTime(timeString) {
   return `${hour12}:${minute} ${ampm}`;
 }
 
-export default function RidePopup({ rideId, ridename, startLocation, endLocation, date, time, currentPassengers, totalPassengers, passengerList, additionalInfo }) {
+export default function RidePopup({ isOpen, onClose, rideId, ridename, startLocation, endLocation, date, time, currentPassengers, totalPassengers, passengerList, additionalInfo }) {
   const [popupHeight, setPopupHeight] = useState('auto');
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const baseHeight = 280;
+    const baseHeight = 380;
     const passengerHeight = 50;
-    const calculatedHeight = baseHeight + passengerList.length * passengerHeight;
-
-    setPopupHeight(calculatedHeight);
-  }, [passengerList]);
+    const additionalInfoHeight = additionalInfo ? 50 : 0; 
+  
+    const calculatedHeight = baseHeight + passengerList.length * passengerHeight + additionalInfoHeight;
+  
+    const finalHeight = Math.max(calculatedHeight, baseHeight);
+  
+    setPopupHeight(finalHeight);
+  }, [passengerList, additionalInfo]);
+  
+  
 
   const handleJoinRide = async () => {
     const token = sessionStorage.getItem('token');
@@ -69,18 +74,23 @@ export default function RidePopup({ rideId, ridename, startLocation, endLocation
 
   return (
     <Popup
-      trigger={<IoIosArrowForward style={{ fontSize: '24px', color: 'white' }} />}
+      open={isOpen}
+      onClose={onClose}
       modal
       nested
       contentStyle={{
         width: '35%',
         padding: '20px',
         borderRadius: '10px',
+        minHeight: '380px', 
         height: popupHeight,
         fontFamily: '"Poppins", sans-serif',
-        backgroundColor: 'rgba(255, 255, 255, 0.3)', // White color with 30% opacity
-        backdropFilter: 'blur(5px)', // Apply a blur effect to the background
-        boxShadow: 'none', // Remove the box shadow
+        backgroundColor: 'transparent', 
+        boxShadow: 'none', 
+        backgroundImage: 'linear-gradient(#00326F , transparent), linear-gradient(to top left, #4F2F98, transparent), linear-gradient(to top right, #10274E, transparent)', // Apply the gradient background
+        backgroundBlendMode: 'screen', 
+        color: 'white', 
+        position: 'relative',
       }}
     >
       {(close) => (
@@ -164,10 +174,13 @@ export default function RidePopup({ rideId, ridename, startLocation, endLocation
 >
   Join Ride
 </button>
-
           </div>
         </div>
       )}
     </Popup>
   );
 }
+
+
+
+

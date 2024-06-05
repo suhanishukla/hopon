@@ -40,6 +40,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "^4.0.3",
     "react-typed": "^2.0.12",
-    "reactjs-popup": "^2.0.6"
+    "reactjs-popup": "^2.0.6",
+    "typewriter-effect": "^2.21.0"
   }
 }
