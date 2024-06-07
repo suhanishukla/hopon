@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles.css'; 
-import myImage from '../images/uberimage.png'
+import myImage from '../images/hoponimage.png'
 import carImage from '../images/car.png'
 import carGif from '../images/cardrive.gif'
 import { Link, useNavigate } from 'react-router-dom';
