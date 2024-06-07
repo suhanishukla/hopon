@@ -41,14 +41,13 @@ Server Side
 Open 2 terminals for client and server and run npm start in both.
 
 ## Features
-- **User Authentication:** Users will provide their email address to make an account. To verify that the users are college students, we will require that the user provides a university issued email address ending with .edu. A verification email will be sent to the provided email address to confirm the email address in order to finish account creation.  
-- **Post a Ride:**
-- **Find a Ride:**
-- **Join a Ride:**
-- **Google Maps API:**
-- **Contact Ride Poster:**
+- **User Authentication:** Users will provide their email address to make an account. To verify that the users are college students, we will require that the user provide a university-issued email address ending with .edu. A verification email will be sent to the provided email address to confirm the email address in order to finish account creation.  
+- **Post a Ride:** Users can post a ride for other users to join with the following fields: starting location, ending location, date, and time. 
+- **Find a Ride:** Users can filter through posted rides using the same fields as above, with a search bar-type functionality. Using the Google Maps API, we created a function to display rides with starting and ending locations within a 5-mile radius of the search filters. The rides displayed are also within a 30-minute window of the entered start time. 
+- **Join a Ride:** Users can join posted rides and also email the poster of the ride (at their registered email address). Once a user joins a ride, the number of seats available dynamically updates as well. 
+- **Contact Ride Poster:**: Users can contact the poster of specific rides via email at the poster's registered email address. The body of the email is dynamically generated to include information about the ride. 
 
-## Technology
+## Tech Stack
 -  **Frontend:** React.js, Javascript, Node.js
 -  **Backend:** MongoDB, Express.js
 
