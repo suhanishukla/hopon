@@ -5,6 +5,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { IoPerson } from "react-icons/io5";
 import { FaCrown } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
 function formatDate(dateString) {
   const options = { month: 'long', day: 'numeric' };
@@ -25,10 +26,9 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const baseHeight = 380;
-    const passengerHeight = 50;
-    const additionalInfoHeight = additionalInfo ? 50 : 0; 
-    const calculatedHeight = baseHeight + passengerList.length * passengerHeight + additionalInfoHeight;
+    const baseHeight = 350;
+    const additionalInfoHeight = additionalInfo ? (additionalInfo.length/55 + 1) * 15 + 30: 0; 
+    const calculatedHeight = baseHeight + additionalInfoHeight;
     const finalHeight = Math.max(calculatedHeight, baseHeight);
     setPopupHeight(finalHeight);
   }, [passengerList, additionalInfo]);
@@ -136,7 +136,7 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
       modal
       nested
       contentStyle={{
-        width: '35%',
+        width: '450px',
         padding: '20px',
         borderRadius: '10px',
         minHeight: '380px',
@@ -152,8 +152,30 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
     >
       {(close) => (
         <div className="popup" style={{ color: 'white', fontFamily: '"Poppins", sans-serif' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}> 
           <div style={{ textAlign: 'left', marginBottom: '15px', fontSize: '24px', fontWeight: 'normal', marginLeft: '0px', padding: '0', fontWeight: '600' }}>
             {ridename}
+          </div>
+          <button
+              onClick={close}
+              style={{
+                display: 'inline-block',
+                  verticalAlign: 'middle',
+                  fontSize: '20px',
+                  backgroundColor: 'transparent',
+                  border: 'transparent',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer',
+              }}
+              // onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+              onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+            >
+              <IoClose />
+            </button>
           </div>
           {additionalInfo && (
             <div style={{ marginBottom: '20px', fontWeight: 'normal', fontSize: '16px' }}>
@@ -202,50 +224,103 @@ export default function RidePopup({ isOpen, onClose, rideId, ridename, startLoca
             </div>
           </div>
           <div style={{ marginBottom: '20px' }}>
-            <div style={{ fontSize: '16px', marginBottom: '10px', fontWeight: 'bold', color: 'white' }}>Passengers</div>
-            {passengerList.map((passenger, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                {passenger.isCreator ? <FaCrown style={{ marginRight: '10px', color: 'gold' }} /> : <IoPerson style={{ marginRight: '10px' }} />}
-                <div style={{ backgroundColor: 'transparent', border: '2px solid white', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px', width: '100%', pointerEvents: 'none' }}>
-                  {passenger.name}
-                </div>
-              </div>
-            ))}
+            
           </div>
           {error && (
             <div style={{ color: 'red', marginBottom: '20px' }}>
               {error}
             </div>
           )}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ marginTop: '20px', textAlign: 'right' }}> {}
+          <button
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  fontSize: '20px',
+                  padding: '5px 10px',
+                  paddingTop: '10px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer',
+                  marginRight: '4%',
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
+                onClick={handleEmailClick}
+              >
+                <MdOutlineMailOutline />
+              </button>
             {isCreator ? (
               <button
                 onClick={handleDeleteRide}
-                style={{ backgroundColor: '#FF0000', border: 'none', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }}
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                }}
               >
                 Delete Ride
               </button>
             ) : isJoined ? (
               <button
                 onClick={handleLeaveRide}
-                style={{ backgroundColor: '#FF0000', border: 'none', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }}
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
               >
                 Leave Ride
               </button>
             ) : (
               <button
                 onClick={handleJoinRide}
-                style={{ backgroundColor: '#0044CC', border: 'none', borderRadius: '40px', color: 'white', fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }}
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  fontSize: '16px',
+                  padding: '10px 20px',
+                  backgroundColor: 'transparent',
+                  border: '2px solid white',
+                  borderRadius: '40px',
+                  color: 'white',
+                  fontFamily: '"Poppins", sans-serif',
+                  fontWeight: '600',
+                  transition: 'background-color 0.3s ease', 
+                  cursor: 'pointer', 
+                }}
+                onMouseOver={(e) => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#333'; }}
+                onMouseOut={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white'; }}
               >
                 Join Ride
               </button>
             )}
-            <button
-              onClick={close}
-              style={{ backgroundColor: '#CCCCCC', border: 'none', borderRadius: '40px', color: 'black', fontSize: '16px', padding: '10px 20px', cursor: 'pointer' }}
-            >
-              Close
-            </button>
+            
 
           </div>
         </div>
