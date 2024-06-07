@@ -168,6 +168,7 @@ const PostRide = () => {
             const json = await response.json();
 
             if (response.ok) {
+              alert("Ride Added")
               console.log("Ride Added");
             } else {
               console.log(json.error);
