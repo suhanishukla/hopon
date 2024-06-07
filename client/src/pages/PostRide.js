@@ -143,22 +143,6 @@ const PostRide = () => {
       console.error("JWT token not found in session storage");
     }
 
-    const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance, additionalInfo, uniqueID };
-    const response = await fetch('http://localhost:4000/api/workouts/rider', {
-      method: 'POST',
-      body: JSON.stringify(rideDetails),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const json = await response.json();
-
-    if (response.ok) {
-      console.log("Ride Added");
-    } else {
-      console.log(json.error);
-    }
-
     if (start && end) {
       const directionsService = new window.google.maps.DirectionsService();
       directionsService.route(
@@ -167,12 +151,29 @@ const PostRide = () => {
           destination: end,
           travelMode: window.google.maps.TravelMode.DRIVING,
         },
-        (result, status) => {
+        async (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK) {
             setDirections(result);
             const distanceInKm = result.routes[0].legs[0].distance.text;
             setDistance(distanceInKm);
-          } else {
+
+            const rideDetails = { rideName, rideDate, rideTime, passengers, start, end, distance: distanceInKm, additionalInfo, uniqueID };
+            const response = await fetch('http://localhost:4000/api/workouts/rider', {
+              method: 'POST',
+              body: JSON.stringify(rideDetails),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            const json = await response.json();
+
+            if (response.ok) {
+              console.log("Ride Added");
+            } else {
+              console.log(json.error);
+            }
+          } 
+          else {
             console.error(`Error fetching directions ${result}`);
           }
         }
