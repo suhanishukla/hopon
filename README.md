@@ -53,9 +53,4 @@ Open 2 terminals for client and server and run npm start in both.
 -  **Backend:** MongoDB, Express.js
 
 ## Demo
-Here is the video link to our demo!
-
-
-  
-
-
+Here is the [link](https://youtu.be/ZYFLZG8MmI8) to our demo!
