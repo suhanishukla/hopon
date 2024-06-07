@@ -100,7 +100,9 @@ export default function YourRides() {
               currentPassengers={ride.currentPassengers}
               totalPassengers={ride.passengers}
               passengerList={[]}
-              additionalInfo="your mom"
+              additionalInfo={ride.additionalInfo}
+              isCreator={true}
+              isJoined={false}
             />
           ))}
         </div>
@@ -121,7 +123,9 @@ export default function YourRides() {
               currentPassengers={ride.currentPassengers}
               totalPassengers={ride.passengers}
               passengerList={[]}
-              additionalInfo="your mom"
+              additionalInfo={ride.additionalInfo}
+              isCreator={false}
+              isJoined={true}
             />
           ))}
           </div>
