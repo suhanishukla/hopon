@@ -53,3 +53,4 @@ Open 2 terminals for client and server and run npm start in both.
 
 ## Demo
 Here is the [link](https://youtu.be/ZYFLZG8MmI8) to our demo!
+Link to the [slides](https://docs.google.com/presentation/d/1Ue1jCFV2XnbQSuY8iBo3NQaR9KuW1c-cmDeJW9I-z8Y/edit?usp=sharing)
